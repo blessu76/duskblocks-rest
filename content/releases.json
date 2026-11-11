@@ -6,6 +6,10 @@
       "build": "4",
       "status": "testflight",
       "date": "2026-11-11",
+      "summary": {
+        "ko": "TestFlight 첫 공개 빌드. 차분한 8×8 블록 퍼즐에 새 앱 아이콘과 앱 안 릴리즈 노트가 들어갔어요.",
+        "en": "The first public TestFlight build: a calm 8×8 block puzzle with a new app icon and in-app release notes."
+      },
       "notes": {
         "ko": [
           "새 앱 아이콘이 적용됐어요. 남보라에서 살구빛으로 번지는 황혼 위에 둥근 블록이 쌓인 모습이에요.",

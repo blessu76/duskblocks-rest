@@ -2,6 +2,8 @@
 """Generate index.html, ko/index.html and both release-notes pages. Run: python3 scripts/build.py"""
 import json
 import os
+import struct
+import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SHOTS = ["ios_01_start", "ios_02_play_start", "ios_03_dragging", "ios_04_line_clear", "ios_05_midgame", "ios_06_gameover", "ios_07_revived"]
@@ -60,8 +62,27 @@ L = {
   privacy="Privacy", terms="Terms", latest="최신", older="이전 버전", back="홈으로",
   rn_title="릴리즈 노트 — Dusk Blocks", rn_h1="릴리즈 노트", rn_lead="Dusk Blocks 빌드별 변경 내용을 최신순으로 정리했습니다."),
 }
-LANGS = ("en", "ko")
 URL = {"en": {"home": "/", "rn": "/release-notes/"}, "ko": {"home": "/ko/", "rn": "/ko/release-notes/"}}
+
+
+def png_size(path):
+    with open(path, "rb") as f:
+        head = f.read(24)
+    if head[:8] != b"\x89PNG\r\n\x1a\n":
+        sys.exit(f"not a PNG: {path}")
+    return struct.unpack(">II", head[16:24])
+
+
+def screens(k):
+    """Return {index in SHOTS: (name, width, height)} for the screenshots that exist for language k."""
+    out = {}
+    for i, name in enumerate(SHOTS):
+        path = os.path.join(ROOT, "assets", "screens", k, name + ".png")
+        if os.path.exists(path):
+            out[i] = (name,) + png_size(path)
+        else:
+            print(f"WARN: missing {k} screenshot assets/screens/{k}/{name}.png", file=sys.stderr)
+    return out
 
 
 def header(c, page):
@@ -121,14 +142,29 @@ def head_common(c, title, desc, canon, extra=""):
 <link rel="stylesheet" href="/style.css?v={V}">'''
 
 
+def img(k, name, w, h, alt, loading, cls=""):
+    cls_attr = f' class="{cls}"' if cls else ""
+    return (f'<img{cls_attr} src="/assets/screens/{k}/{name}.png?v={V}" width="{w}" height="{h}" alt="{alt}" '
+            f'style="aspect-ratio:{w}/{h}" loading="{loading}" decoding="async">')
+
+
 def page(c):
     k = c["lang"]
     canon = "https://duskblocks.ipe.rest" + c["path"]
     chips = "".join(f"<li>{x}</li>" for x in c["chips"])
     feats = "".join(f'<article class="card"><span class="ico i{i}" aria-hidden="true"></span><h3>{t}</h3><p>{d}</p></article>' for i, (t, d) in enumerate(c["feats"]))
+    sc = screens(k)
     figs = "".join(
-        f'<figure class="shot"><img src="/assets/{s}.png?v={V}" width="560" height="1217" alt="{c["alts"][i]}" loading="{"eager" if i < 1 else "lazy"}" decoding="async"><figcaption><strong>{c["caps"][i][0]}</strong> {c["caps"][i][1]}</figcaption></figure>'
-        for i, s in enumerate(SHOTS))
+        f'<figure class="shot">{img(k, sc[i][0], sc[i][1], sc[i][2], c["alts"][i], "lazy")}<figcaption><strong>{c["caps"][i][0]}</strong> {c["caps"][i][1]}</figcaption></figure>'
+        for i in sorted(sc))
+    hero_v = ""
+    if 1 in sc and 3 in sc:
+        hero_v = (f'<div class="hero-v" aria-hidden="true">'
+                  + img(k, sc[1][0], sc[1][1], sc[1][2], "", "eager", "ph p-a")
+                  + img(k, sc[3][0], sc[3][1], sc[3][2], "", "eager", "ph p-b") + "</div>")
+    cta2 = f'<a class="btn gho" href="#screenshots">{c["cta2"]}</a>' if figs else ""
+    gallery = (f'<section class="sec" id="screenshots"><div class="wrap"><h2>{c["shots_h"]}</h2></div>'
+               f'<div class="gal wrap">{figs}</div></section>') if figs else ""
     ld = ('{"@context":"https://schema.org","@type":"VideoGame","name":"Dusk Blocks","url":"%s","description":"%s","inLanguage":"%s","genre":"Puzzle","gamePlatform":"iOS","applicationCategory":"GameApplication","playMode":"SinglePlayer","image":"https://duskblocks.ipe.rest/assets/og.png","creator":{"@type":"Organization","name":"ipe()","url":"https://ipe.rest/"}}'
           % (canon, c["short"].replace('"', ''), k))
     return f'''{head_common(c, c["title"], c["desc"], canon, "home")}
@@ -143,14 +179,13 @@ def page(c):
 <p class="eyebrow">{c["eyebrow"]}</p>
 <h1>{c["h1a"]} <span>{c["h1b"]}</span></h1>
 <p class="lead">{c["lead"]}</p>
-<p class="cta"><span class="btn pri" aria-disabled="true">{c["soon"]}</span><a class="btn gho" href="#screenshots">{c["cta2"]}</a></p>
+<p class="cta"><span class="btn pri" aria-disabled="true">{c["soon"]}</span>{cta2}</p>
 <ul class="chips">{chips}</ul>
 </div>
-<div class="hero-v" aria-hidden="true"><img class="ph p-a" src="/assets/ios_02_play_start.png?v={V}" width="560" height="1217" alt=""><img class="ph p-b" src="/assets/ios_04_line_clear.png?v={V}" width="560" height="1217" alt=""></div>
+{hero_v}
 </section>
 <section class="wrap sec"><div class="grid3">{feats}</div></section>
-<section class="sec" id="screenshots"><div class="wrap"><h2>{c["shots_h"]}</h2></div>
-<div class="gal wrap">{figs}</div></section>
+{gallery}
 <section class="wrap sec"><div class="store"><h2>{c["store_h"]}</h2><p>{c["store_p"]}</p><p class="tags"><span class="btn pri" aria-disabled="true">{c["soon"]}</span><span class="tag">{c["store_b"]}</span></p></div></section>
 </main>
 {footer(c)}

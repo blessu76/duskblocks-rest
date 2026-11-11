@@ -53,6 +53,7 @@ h2{margin:0 0 24px;font-size:30px;line-height:1.1}
 .f1{color:var(--text);font-weight:600}
 .slots{display:flex;gap:16px;flex-wrap:wrap}
 .slots span{color:var(--text-dim)}
+.rn{margin:0;padding-left:20px;color:var(--text-2)}.rn li{margin:8px 0}.rn strong{color:var(--text)}
 .small{color:var(--text-dim)}
 @media(min-width:768px){
 .wrap{padding:0 32px}

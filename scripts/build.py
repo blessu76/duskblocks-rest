@@ -59,7 +59,7 @@ L = {
   store_h="곧 iPhone에서 만나요", store_p="App Store 출시를 준비하고 있어요.", store_b="iPhone 전용",
   foot1="Dusk Blocks — iPhone용 차분한 블록 퍼즐.", foot2="조용한 한 판, 한 손 플레이, 매일의 퍼즐 휴식을 위해 만들었어요.",
   note="스크린샷은 개발 중인 빌드에서 찍은 것입니다.", contact="문의", more="만든 곳",
-  privacy="Privacy", terms="Terms", latest="최신", older="이전 버전", back="홈으로",
+  privacy="개인정보처리방침", terms="이용약관", latest="최신", older="이전 버전", back="홈으로",
   rn_title="릴리즈 노트 — Dusk Blocks", rn_h1="릴리즈 노트", rn_lead="Dusk Blocks 빌드별 변경 내용을 최신순으로 정리했습니다."),
 }
 URL = {"en": {"home": "/", "rn": "/release-notes/"}, "ko": {"home": "/ko/", "rn": "/ko/release-notes/"}}
@@ -89,7 +89,7 @@ def header(c, page):
     k = c["lang"]
     other = "ko" if k == "en" else "en"
     cur = lambda p: ' aria-current="page"' if p == page else ""
-    switch = (f'<span class="lang-cur" lang="{k}" aria-current="true">{k.upper()}</span>'
+    switch = (f'<span class="lang-cur" lang="{k}">{k.upper()}</span>'
               f'<span class="sep" aria-hidden="true">|</span>'
               f'<a class="lang" href="{URL[other][page]}" hreflang="{other}" lang="{other}">{other.upper()}</a>')
     return (f'<header class="bar"><div class="wrap barin">'

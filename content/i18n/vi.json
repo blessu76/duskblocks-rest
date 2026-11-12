@@ -3,7 +3,6 @@
  "desc": "Dusk Blocks là trò xếp khối 8×8 thư giãn cho iPhone. Đặt ba khối, xóa hàng và tận hưởng câu đố mỗi ngày, chơi gọn trong một tay.",
  "short": "Trò xếp khối 8×8 thư giãn cho iPhone, có câu đố hằng ngày, hiệu ứng xóa hàng mượt mà và chơi một tay.",
  "home": "Trang chủ",
- "rn": "Ghi chú phát hành",
  "soon": "Sắp ra mắt",
  "eyebrow": "XẾP KHỐI THƯ GIÃN",
  "h1a": "Dusk",
@@ -81,22 +80,6 @@
  "more": "Một trò chơi của",
  "privacy": "Quyền riêng tư",
  "terms": "Điều khoản",
- "latest": "Mới nhất",
- "older": "Các phiên bản trước",
- "back": "Về trang chủ",
- "rn_title": "Ghi chú phát hành – Dusk Blocks",
- "rn_h1": "Ghi chú phát hành",
- "rn_lead": "Nội dung của từng bản dựng Dusk Blocks, mới nhất xếp trước.",
  "nav_label": "Menu chính",
- "lang_label": "Ngôn ngữ",
- "releases": {
-  "1.0.0-4": {
-   "summary": "Bản TestFlight công khai đầu tiên: trò xếp khối 8×8 thư giãn với biểu tượng ứng dụng mới và ghi chú phát hành ngay trong ứng dụng.",
-   "notes": [
-    "Biểu tượng ứng dụng mới: những khối bo tròn xếp chồng trên nền hoàng hôn chuyển từ tím đậm sang màu mơ.",
-    "Phần Cài đặt có thêm mục \"Ghi chú phát hành\", cho bạn xem thay đổi của từng phiên bản mà không cần rời khỏi ứng dụng.",
-    "Khi không có mạng, màn hình Ghi chú phát hành vẫn hiển thị các thay đổi gần nhất."
-   ]
-  }
- }
+ "lang_label": "Ngôn ngữ"
 }

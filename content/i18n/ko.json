@@ -3,7 +3,6 @@
  "desc": "Dusk Blocks는 iPhone용 차분한 8×8 블록 퍼즐로, 3개 조각을 놓아 줄을 지우며 매일 가볍게 즐길 수 있습니다.",
  "short": "매일의 퍼즐과 부드러운 줄 삭제, 한 손 플레이를 담은 iPhone용 차분한 8×8 블록 퍼즐.",
  "home": "홈",
- "rn": "릴리즈 노트",
  "soon": "출시 예정",
  "eyebrow": "차분한 블록 퍼즐",
  "h1a": "Dusk",
@@ -81,12 +80,6 @@
  "more": "만든 곳",
  "privacy": "개인정보처리방침",
  "terms": "이용약관",
- "latest": "최신",
- "older": "이전 버전",
- "back": "홈으로",
- "rn_title": "릴리즈 노트 — Dusk Blocks",
- "rn_h1": "릴리즈 노트",
- "rn_lead": "Dusk Blocks 빌드별 변경 내용을 최신순으로 정리했습니다.",
  "nav_label": "주 메뉴",
  "lang_label": "언어"
 }

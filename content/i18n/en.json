@@ -3,7 +3,6 @@
  "desc": "Dusk Blocks is a calm 8×8 block puzzle for iPhone. Place three pieces, clear lines, and enjoy daily puzzles, soft line clears, and one-handed play.",
  "short": "A calm 8×8 block puzzle for iPhone with daily puzzles, soft line clears, and one-handed play.",
  "home": "Home",
- "rn": "Release Notes",
  "soon": "Coming soon",
  "eyebrow": "CALM BLOCK PUZZLE",
  "h1a": "Dusk",
@@ -81,12 +80,6 @@
  "more": "A game by",
  "privacy": "Privacy",
  "terms": "Terms",
- "latest": "Latest",
- "older": "Earlier versions",
- "back": "Back to home",
- "rn_title": "Release notes — Dusk Blocks",
- "rn_h1": "Release notes",
- "rn_lead": "What is in each build of Dusk Blocks, newest first.",
  "nav_label": "Main",
  "lang_label": "Language"
 }

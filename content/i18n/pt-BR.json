@@ -3,7 +3,6 @@
  "desc": "Dusk Blocks é um quebra-cabeça de blocos relaxante em 8×8 para iPhone: encaixe três peças, limpe linhas e jogue o desafio diário com uma só mão.",
  "short": "Quebra-cabeça de blocos relaxante em 8×8 para iPhone, com desafio diário, linhas suaves e jogo com uma mão.",
  "home": "Início",
- "rn": "Notas da versão",
  "soon": "Em breve",
  "eyebrow": "QUEBRA-CABEÇA DE BLOCOS RELAXANTE",
  "lead": "Um quebra-cabeça de blocos feito para noites tranquilas. Encaixe 3 peças em um tabuleiro 8×8, limpe linhas e jogue no seu ritmo.",
@@ -79,24 +78,8 @@
  "more": "Um jogo de",
  "privacy": "Privacidade",
  "terms": "Termos",
- "latest": "Mais recente",
- "older": "Versões anteriores",
- "back": "Voltar ao início",
- "rn_title": "Notas da versão — Dusk Blocks",
- "rn_h1": "Notas da versão",
- "rn_lead": "O que há em cada versão do Dusk Blocks, da mais recente para a mais antiga.",
  "nav_label": "Menu principal",
  "lang_label": "Idioma",
- "releases": {
-  "1.0.0-4": {
-   "summary": "A primeira versão pública no TestFlight: um quebra-cabeça de blocos relaxante em 8×8, com novo ícone e notas da versão dentro do app.",
-   "notes": [
-    "Novo ícone: blocos arredondados sobre um degradê de entardecer que vai do violeta profundo ao damasco.",
-    "Os Ajustes agora têm a opção «Notas da versão», que mostra o que mudou em cada versão sem sair do app.",
-    "Sem conexão, a tela de notas da versão continua mostrando as mudanças mais recentes."
-   ]
-  }
- },
  "h1a": "Dusk",
  "h1b": "Blocks"
 }

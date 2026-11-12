@@ -12,9 +12,9 @@ from ipe_web_kit import languages  # noqa: E402
 SUP = languages.SUPPORTED
 
 
-def page_path(lang, rn=False):
+def page_path(lang):
     base = "" if lang == languages.DEFAULT else lang + "/"
-    return REPO / (base + ("release-notes/" if rn else "") + "index.html")
+    return REPO / (base + "index.html")
 
 
 class SharedLanguages(unittest.TestCase):
@@ -25,11 +25,9 @@ class SharedLanguages(unittest.TestCase):
         en = json.loads((REPO / "content/i18n/en.json").read_text(encoding="utf-8"))
         for l in SUP:
             d = json.loads((REPO / f"content/i18n/{l}.json").read_text(encoding="utf-8"))
-            self.assertEqual(set(d) - {"releases"}, set(en) - {"releases"}, l)
+            self.assertEqual(set(d), set(en), l)
             for k in ("feats", "caps", "alts", "chips"):
                 self.assertEqual(len(d[k]), len(en[k]), (l, k))
-            if l not in ("en", "ko"):
-                self.assertEqual(len(d["releases"]["1.0.0-4"]["notes"]), 3, l)
 
     def test_ended_languages_are_not_listed_and_files_are_not_deleted(self):
         for l in languages.ENDED:
@@ -38,16 +36,16 @@ class SharedLanguages(unittest.TestCase):
 
     def test_pages_hreflang_and_data_lang_are_exact(self):
         for l in SUP:
-            for rn in (False, True):
-                html = page_path(l, rn).read_text(encoding="utf-8")
-                self.assertIn(f'<html lang="{l}">', html)
-                hl = re.findall(r'<link rel="alternate" hreflang="([^"]+)"', html)
-                self.assertEqual(hl, list(SUP) + ["x-default"], (l, rn))
-                self.assertEqual(re.findall(r'data-lang="([^"]+)"', html), list(SUP), (l, rn))
+            html = page_path(l).read_text(encoding="utf-8")
+            self.assertIn(f'<html lang="{l}">', html)
+            hl = re.findall(r'<link rel="alternate" hreflang="([^"]+)"', html)
+            self.assertEqual(hl, list(SUP) + ["x-default"], l)
+            self.assertEqual(re.findall(r'data-lang="([^"]+)"', html), list(SUP), l)
 
     def test_sitemap_lists_every_page(self):
         sm = (REPO / "sitemap.xml").read_text(encoding="utf-8")
-        self.assertEqual(sm.count("<loc>"), len(SUP) * 2)
+        self.assertEqual(sm.count("<loc>"), len(SUP))
+        self.assertNotIn("release-notes", sm)
         for l in SUP:
             self.assertIn("https://duskblocks.ipe.rest" + ("/" if l == "en" else f"/{l}/") + "</loc>", sm)
 

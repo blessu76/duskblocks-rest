@@ -14,7 +14,6 @@ PAGES = {}
 for _l in languages.SUPPORTED:
     _base = "" if _l == languages.DEFAULT else _l + "/"
     PAGES[_base + "index.html"] = _l
-    PAGES[_base + "release-notes/index.html"] = _l
 ALLOWED_LATIN_KO = {"Dusk", "Blocks", "iPhone", "App", "Store", "TestFlight", "ipe", "Contact", "EN", "KO"}
 HANGUL = re.compile(r"[ㄱ-ㆎ가-힣]")
 KANA = re.compile(r"[぀-ヿ]")

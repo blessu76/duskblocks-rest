@@ -3,7 +3,6 @@
  "desc": "Dusk Blocks ist ein entspanntes 8×8-Blockpuzzle für iPhone. Setze drei Steine, räume Reihen ab und genieße tägliche Rätsel und Spielen mit einer Hand.",
  "short": "Entspanntes 8×8-Blockpuzzle für iPhone mit täglichem Rätsel, sanftem Abräumen und Einhandspiel.",
  "home": "Start",
- "rn": "Versionshinweise",
  "soon": "Bald verfügbar",
  "eyebrow": "ENTSPANNTES BLOCKPUZZLE",
  "h1a": "Dusk",
@@ -81,22 +80,6 @@
  "more": "Ein Spiel von",
  "privacy": "Datenschutz",
  "terms": "Nutzungsbedingungen",
- "latest": "Neueste",
- "older": "Frühere Versionen",
- "back": "Zurück zur Startseite",
- "rn_title": "Versionshinweise – Dusk Blocks",
- "rn_h1": "Versionshinweise",
- "rn_lead": "Was in jedem Build von Dusk Blocks steckt, die neueste zuerst.",
  "nav_label": "Hauptmenü",
- "lang_label": "Sprache",
- "releases": {
-  "1.0.0-4": {
-   "summary": "Der erste öffentliche TestFlight-Build: ein entspanntes 8×8-Blockpuzzle mit neuem App-Symbol und Versionshinweisen direkt in der App.",
-   "notes": [
-    "Neues App-Symbol: abgerundete Blöcke über einem Dämmerungsverlauf von tiefem Violett zu Aprikose.",
-    "In den Einstellungen gibt es jetzt den Eintrag „Versionshinweise“, der zeigt, was sich in jeder Version geändert hat – ohne die App zu verlassen.",
-    "Auch offline zeigt der Bildschirm „Versionshinweise“ die letzten Änderungen an."
-   ]
-  }
- }
+ "lang_label": "Sprache"
 }

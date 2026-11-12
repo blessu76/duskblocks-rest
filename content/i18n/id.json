@@ -3,7 +3,6 @@
  "desc": "Dusk Blocks adalah puzzle blok 8×8 yang tenang untuk iPhone. Letakkan tiga keping, hapus baris, dan nikmati puzzle harian serta permainan satu tangan.",
  "short": "Puzzle blok 8×8 yang tenang untuk iPhone, dengan puzzle harian, efek hapus baris yang lembut, dan main satu tangan.",
  "home": "Beranda",
- "rn": "Catatan rilis",
  "soon": "Segera hadir",
  "eyebrow": "PUZZLE BLOK YANG TENANG",
  "h1a": "Dusk",
@@ -81,22 +80,6 @@
  "more": "Game dari",
  "privacy": "Privasi",
  "terms": "Ketentuan",
- "latest": "Terbaru",
- "older": "Versi sebelumnya",
- "back": "Kembali ke beranda",
- "rn_title": "Catatan rilis – Dusk Blocks",
- "rn_h1": "Catatan rilis",
- "rn_lead": "Isi setiap build Dusk Blocks, dari yang terbaru.",
  "nav_label": "Menu utama",
- "lang_label": "Bahasa",
- "releases": {
-  "1.0.0-4": {
-   "summary": "Build TestFlight publik pertama: puzzle blok 8×8 yang tenang dengan ikon aplikasi baru dan catatan rilis di dalam aplikasi.",
-   "notes": [
-    "Ikon aplikasi baru: blok bersudut bulat bertumpuk di atas gradasi senja yang memudar dari ungu tua ke warna aprikot.",
-    "Pengaturan kini punya menu \"Catatan rilis\" yang menampilkan perubahan tiap versi tanpa perlu keluar dari aplikasi.",
-    "Saat offline, layar Catatan rilis tetap menampilkan perubahan terbaru."
-   ]
-  }
- }
+ "lang_label": "Bahasa"
 }

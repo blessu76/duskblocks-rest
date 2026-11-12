@@ -3,7 +3,6 @@
  "desc": "Dusk Blocks, iPhone için sakin bir 8×8 blok bulmacası. Üç parçayı yerleştir, satırları temizle; günlük bulmacaların ve tek elle oynamanın keyfini çıkar.",
  "short": "iPhone için sakin 8×8 blok bulmacası: günlük bulmaca, yumuşak satır temizleme ve tek elle oynama.",
  "home": "Ana sayfa",
- "rn": "Sürüm notları",
  "soon": "Yakında",
  "eyebrow": "SAKİN BLOK BULMACA",
  "h1a": "Dusk",
@@ -81,22 +80,6 @@
  "more": "Geliştiren",
  "privacy": "Gizlilik",
  "terms": "Koşullar",
- "latest": "En yeni",
- "older": "Önceki sürümler",
- "back": "Ana sayfaya dön",
- "rn_title": "Sürüm notları – Dusk Blocks",
- "rn_h1": "Sürüm notları",
- "rn_lead": "Dusk Blocks'un her sürümünde neler var, en yenisi başta.",
  "nav_label": "Ana menü",
- "lang_label": "Dil",
- "releases": {
-  "1.0.0-4": {
-   "summary": "İlk herkese açık TestFlight sürümü: yeni uygulama simgesi ve uygulama içi sürüm notlarıyla sakin bir 8×8 blok bulmacası.",
-   "notes": [
-    "Yeni uygulama simgesi: koyu mordan kayısıya solan bir alacakaranlık geçişinin üzerinde istiflenmiş yuvarlak bloklar.",
-    "Ayarlar'da artık \"Sürüm notları\" girişi var; uygulamadan çıkmadan her sürümde nelerin değiştiğini görebilirsin.",
-    "Çevrimdışıyken bile Sürüm notları ekranı en son değişiklikleri gösterir."
-   ]
-  }
- }
+ "lang_label": "Dil"
 }

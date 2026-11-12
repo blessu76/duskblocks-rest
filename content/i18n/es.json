@@ -1,0 +1,102 @@
+{
+ "title": "Dusk Blocks — Puzzle de bloques tranquilo para iPhone",
+ "desc": "Dusk Blocks es un puzzle de bloques tranquilo de 8×8 para iPhone: coloca tres piezas, borra líneas y disfruta del reto diario con una sola mano.",
+ "short": "Puzzle de bloques tranquilo de 8×8 para iPhone, con reto diario, líneas suaves y juego con una mano.",
+ "home": "Inicio",
+ "rn": "Notas de la versión",
+ "soon": "Próximamente",
+ "eyebrow": "PUZZLE DE BLOQUES TRANQUILO",
+ "lead": "Un puzzle de bloques pensado para tardes tranquilas. Coloca 3 piezas en un tablero de 8×8, borra líneas y mantén el ritmo a tu manera.",
+ "cta2": "Ver capturas",
+ "chips": [
+  "Juego con una mano",
+  "Reto diario",
+  "Continuar con anuncio solo si tú quieres",
+  "12 idiomas"
+ ],
+ "feats": [
+  [
+   "Siempre empiezas con solución",
+   "Las tres piezas siguientes siempre tienen sitio, así que cada partida arranca justa y relajada."
+  ],
+  [
+   "Reto diario: un tablero por día",
+   "Un tablero nuevo cada día, generado a partir de la fecha, para un hábito diario sin prisas."
+  ],
+  [
+   "Borrar líneas se siente suave y gratificante",
+   "Movimientos sutiles, puntos que saltan y un bono de color por borrar una fila de un solo color."
+  ]
+ ],
+ "shots_h": "Capturas",
+ "skip": "Saltar al contenido",
+ "caps": [
+  [
+   "Empieza la partida.",
+   "Un primer vistazo tranquilo al tablero de 8×8 y a la bandeja de tres piezas."
+  ],
+  [
+   "Coloca tus primeras piezas.",
+   "Empieza con calma y deja el tablero con margen para moverte."
+  ],
+  [
+   "Arrastra con una mano.",
+   "Una colocación fluida, pensada para jugar rápido y sin ruido."
+  ],
+  [
+   "Borra una línea y siente el ritmo.",
+   "Las líneas desaparecen con un destello suave y dejan sitio para la siguiente jugada."
+  ],
+  [
+   "A mitad de partida, todo bajo control.",
+   "Planifica con antelación y evita que el tablero se bloquee."
+  ],
+  [
+   "Cuando el tablero se llena.",
+   "La partida termina limpia, con tus puntos y tu mejor marca a la vista."
+  ],
+  [
+   "Continúa si quieres.",
+   "El anuncio para continuar solo aparece si tú lo eliges."
+  ]
+ ],
+ "alts": [
+  "Pantalla de inicio de Dusk Blocks",
+  "Primeras piezas colocadas",
+  "Arrastrando una pieza",
+  "Una línea desapareciendo",
+  "Tablero a mitad de partida",
+  "Pantalla de fin de partida",
+  "Partida reanudada tras continuar"
+ ],
+ "store_h": "Muy pronto en iPhone",
+ "store_p": "El lanzamiento en la App Store llegará pronto.",
+ "store_b": "Solo para iPhone",
+ "foot1": "Dusk Blocks — un puzzle de bloques tranquilo para iPhone.",
+ "foot2": "Hecho para ratos de calma, juego con una mano y pausas con el reto diario.",
+ "note": "Las capturas son de versiones en desarrollo.",
+ "contact": "Contacto",
+ "more": "Un juego de",
+ "privacy": "Privacidad",
+ "terms": "Términos",
+ "latest": "Última",
+ "older": "Versiones anteriores",
+ "back": "Volver al inicio",
+ "rn_title": "Notas de la versión — Dusk Blocks",
+ "rn_h1": "Notas de la versión",
+ "rn_lead": "Qué trae cada versión de Dusk Blocks, de la más reciente a la más antigua.",
+ "nav_label": "Menú principal",
+ "lang_label": "Idioma",
+ "releases": {
+  "1.0.0-4": {
+   "summary": "La primera versión pública en TestFlight: un puzzle de bloques tranquilo de 8×8 con nuevo icono y notas de la versión dentro de la app.",
+   "notes": [
+    "Nuevo icono: bloques redondeados sobre un degradado de atardecer que va del violeta intenso al albaricoque.",
+    "Ajustes ahora incluye «Notas de la versión», para ver qué cambió en cada versión sin salir de la app.",
+    "Sin conexión, la pantalla de notas de la versión sigue mostrando los cambios más recientes."
+   ]
+  }
+ },
+ "h1a": "Dusk",
+ "h1b": "Blocks"
+}

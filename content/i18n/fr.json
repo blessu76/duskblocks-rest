@@ -1,0 +1,85 @@
+{
+ "title": "Dusk Blocks — Puzzle de blocs apaisant pour iPhone",
+ "desc": "Dusk Blocks est un puzzle de blocs apaisant en 8×8 pour iPhone : placez trois pièces, effacez des lignes et profitez du défi du jour, à une main.",
+ "short": "Puzzle de blocs apaisant en 8×8 pour iPhone, avec défi du jour, lignes effacées tout en douceur et jeu à une main.",
+ "home": "Accueil",
+ "soon": "Bientôt disponible",
+ "eyebrow": "PUZZLE DE BLOCS APAISANT",
+ "lead": "Un puzzle de blocs pensé pour les soirées tranquilles. Placez 3 pièces sur une grille de 8×8, effacez des lignes et gardez le rythme qui vous convient.",
+ "cta2": "Voir les captures d'écran",
+ "chips": [
+  "Jeu à une main",
+  "Défi du jour",
+  "Continuer avec une pub, seulement si vous le voulez",
+  "12 langues"
+ ],
+ "feats": [
+  [
+   "Des parties toujours jouables",
+   "Les trois prochaines pièces trouvent toujours leur place : chaque partie démarre équitablement, dans le calme."
+  ],
+  [
+   "Défi du jour, une grille par jour",
+   "Une nouvelle grille chaque jour, générée à partir de la date, pour une petite habitude quotidienne sans pression."
+  ],
+  [
+   "Des lignes effacées tout en douceur",
+   "Des animations discrètes, des points qui s'affichent et un bonus couleur quand vous effacez une ligne d'une seule couleur."
+  ]
+ ],
+ "shots_h": "Captures d'écran",
+ "skip": "Aller au contenu",
+ "caps": [
+  [
+   "Lancez la partie.",
+   "Un premier coup d'œil apaisant à la grille de 8×8 et au plateau de trois pièces."
+  ],
+  [
+   "Posez vos premières pièces.",
+   "Démarrez en douceur et gardez de la marge sur la grille."
+  ],
+  [
+   "Glissez d'une seule main.",
+   "Un placement fluide, conçu pour jouer vite et sans bruit."
+  ],
+  [
+   "Effacez une ligne, sentez le rythme.",
+   "Les lignes s'évaporent dans un léger éclat et libèrent de la place pour le coup suivant."
+  ],
+  [
+   "En pleine partie, vous gardez la main.",
+   "Anticipez pour éviter que la grille ne se bloque."
+  ],
+  [
+   "Quand la grille est pleine.",
+   "La partie se termine en douceur, avec votre score et votre meilleur score sous les yeux."
+  ],
+  [
+   "Continuez si vous le souhaitez.",
+   "La pub pour continuer n'apparaît que si vous le choisissez."
+  ]
+ ],
+ "alts": [
+  "Écran d'accueil de Dusk Blocks",
+  "Premières pièces posées",
+  "Glisser une pièce",
+  "Une ligne en train de s'effacer",
+  "Grille en cours de partie",
+  "Écran de fin de partie",
+  "Partie reprise après avoir continué"
+ ],
+ "store_h": "Bientôt sur iPhone",
+ "store_p": "La sortie sur l'App Store arrive bientôt.",
+ "store_b": "iPhone uniquement",
+ "foot1": "Dusk Blocks — un puzzle de blocs apaisant pour iPhone.",
+ "foot2": "Conçu pour les moments de calme, le jeu à une main et les pauses défi du jour.",
+ "note": "Les captures d'écran proviennent de versions en cours de développement.",
+ "contact": "Contact",
+ "more": "Un jeu de",
+ "privacy": "Confidentialité",
+ "terms": "Conditions",
+ "nav_label": "Menu principal",
+ "lang_label": "Langue",
+ "h1a": "Dusk",
+ "h1b": "Blocks"
+}

@@ -1,0 +1,85 @@
+{
+ "title": "Dusk Blocks – iPhone için Sakin Blok Bulmaca",
+ "desc": "Dusk Blocks, iPhone için sakin bir 8×8 blok bulmacası. Üç parçayı yerleştir, satırları temizle; günlük bulmacaların ve tek elle oynamanın keyfini çıkar.",
+ "short": "iPhone için sakin 8×8 blok bulmacası: günlük bulmaca, yumuşak satır temizleme ve tek elle oynama.",
+ "home": "Ana sayfa",
+ "soon": "Yakında",
+ "eyebrow": "SAKİN BLOK BULMACA",
+ "h1a": "Dusk",
+ "h1b": "Blocks",
+ "lead": "Sessiz akşamlar için sakin bir blok bulmaca. 8×8 tahtaya 3 parça yerleştir, satırları temizle ve kendi temponda oyna.",
+ "cta2": "Ekran görüntülerine bak",
+ "chips": [
+  "Tek elle oynama",
+  "Günlük bulmaca",
+  "Reklamlı devam yalnızca sen istersen",
+  "12 dil"
+ ],
+ "feats": [
+  [
+   "Her zaman çözülebilir başlangıç",
+   "Sıradaki üç parçanın mutlaka sığacağı bir yer vardır; her oyun adil ve sakin başlar."
+  ],
+  [
+   "Günlük bulmaca, günde bir tahta",
+   "Her gün tarihten üretilen yeni bir tahta; sakin bir günlük alışkanlık için."
+  ],
+  [
+   "Satır temizlemek yumuşak ve tatmin edici",
+   "Hafif hareketler, beliren skorlar ve tek renkli bir satırı temizleyince renk satırı bonusu."
+  ]
+ ],
+ "shots_h": "Ekran görüntüleri",
+ "skip": "İçeriğe geç",
+ "caps": [
+  [
+   "Tahtayı başlat.",
+   "8×8 bulmacaya ve üç parçalık tepsiye sakin bir ilk bakış."
+  ],
+  [
+   "İlk parçaları yerleştir.",
+   "Kolay bir açılışla başla ve tahtayı esnek tut."
+  ],
+  [
+   "Tek elle sürükle.",
+   "Hızlı ve sessiz oyun için akıcı yerleştirme."
+  ],
+  [
+   "Bir satırı temizle, akışı hisset.",
+   "Satırlar yumuşak bir patlamayla kaybolur, sonraki hamleye yer açar."
+  ],
+  [
+   "Oyunun ortasında bile kontrol sende.",
+   "Önceden planla ve tahtanın tıkanmasını önle."
+  ],
+  [
+   "Tahta dolduğunda.",
+   "Oyun temiz bir şekilde biter; skorun ve en iyi skorun ekranda."
+  ],
+  [
+   "İstersen devam et.",
+   "Reklamlı devam seçeneği yalnızca sen istersen çıkar."
+  ]
+ ],
+ "alts": [
+  "Dusk Blocks başlangıç ekranı",
+  "İlk parçalar yerleştirildi",
+  "Bir parçayı sürükleme",
+  "Temizlenen bir satır",
+  "Oyun ortasında tahta",
+  "Oyun bitti ekranı",
+  "Devam ettikten sonra sürdürülen oyun"
+ ],
+ "store_h": "Yakında iPhone'da",
+ "store_p": "App Store sürümü yakında geliyor.",
+ "store_b": "Yalnızca iPhone",
+ "foot1": "Dusk Blocks – iPhone için sakin blok bulmaca.",
+ "foot2": "Sessiz oyun molaları, tek elle oynama ve günlük bulmaca araları için.",
+ "note": "Ekran görüntüleri geliştirme sürecindeki yapılardan alınmıştır.",
+ "contact": "İletişim",
+ "more": "Geliştiren",
+ "privacy": "Gizlilik",
+ "terms": "Koşullar",
+ "nav_label": "Ana menü",
+ "lang_label": "Dil"
+}

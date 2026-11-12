@@ -1,0 +1,85 @@
+{
+ "title": "Dusk Blocks — A Calm Block Puzzle for iPhone",
+ "desc": "Dusk Blocks is a calm 8×8 block puzzle for iPhone. Place three pieces, clear lines, and enjoy daily puzzles, soft line clears, and one-handed play.",
+ "short": "A calm 8×8 block puzzle for iPhone with daily puzzles, soft line clears, and one-handed play.",
+ "home": "Home",
+ "soon": "Coming soon",
+ "eyebrow": "CALM BLOCK PUZZLE",
+ "h1a": "Dusk",
+ "h1b": "Blocks",
+ "lead": "Calm block puzzle, tuned for quiet evenings. Place 3 pieces on an 8×8 board, clear lines, and keep the board flowing at your own pace.",
+ "cta2": "View screenshots",
+ "chips": [
+  "One-handed play",
+  "Daily puzzle",
+  "Rewarded continue only when you choose it",
+  "12 languages"
+ ],
+ "feats": [
+  [
+   "Always solvable starts",
+   "The next three pieces always have a way to fit, so every run starts fair and calm."
+  ],
+  [
+   "Daily puzzle, one seed per day",
+   "A fresh board every day, generated from the date for a quiet daily habit."
+  ],
+  [
+   "Line clears feel soft and rewarding",
+   "Subtle motion, score pops, and a color-line bonus for clearing a single-color row."
+  ]
+ ],
+ "shots_h": "Screenshots",
+ "skip": "Skip to content",
+ "caps": [
+  [
+   "Start the board.",
+   "A calm first look at the 8×8 puzzle and the three-piece tray."
+  ],
+  [
+   "Place your first pieces.",
+   "Begin with an easy opening and keep the board flexible."
+  ],
+  [
+   "Drag with one hand.",
+   "Smooth placement designed for quick, quiet play."
+  ],
+  [
+   "Clear a line, feel the flow.",
+   "Lines disappear with a soft burst and make room for the next move."
+  ],
+  [
+   "Mid-game, still in control.",
+   "Plan ahead and keep the board from locking up."
+  ],
+  [
+   "When the board fills up.",
+   "The run ends cleanly with your score and best score in view."
+  ],
+  [
+   "Continue if you want to.",
+   "A rewarded continue appears only when you choose it."
+  ]
+ ],
+ "alts": [
+  "Dusk Blocks start screen",
+  "First pieces placed",
+  "Dragging a piece",
+  "A line clearing",
+  "Mid-game board",
+  "Game over screen",
+  "Resumed game after a continue"
+ ],
+ "store_h": "Available on iPhone soon",
+ "store_p": "The App Store release is coming soon.",
+ "store_b": "iPhone only",
+ "foot1": "Dusk Blocks — a calm block puzzle for iPhone.",
+ "foot2": "Made for quiet sessions, one-handed play, and daily puzzle breaks.",
+ "note": "Screenshots are from in-development builds.",
+ "contact": "Contact",
+ "more": "A game by",
+ "privacy": "Privacy",
+ "terms": "Terms",
+ "nav_label": "Main",
+ "lang_label": "Language"
+}

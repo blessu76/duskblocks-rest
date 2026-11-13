@@ -44,7 +44,8 @@ class SharedLanguages(unittest.TestCase):
 
     def test_sitemap_lists_every_page(self):
         sm = (REPO / "sitemap.xml").read_text(encoding="utf-8")
-        self.assertEqual(sm.count("<loc>"), len(SUP))
+        home = [u for u in re.findall(r"<loc>([^<]+)</loc>", sm) if "/journal/" not in u]
+        self.assertEqual(len(home), len(SUP))
         self.assertNotIn("release-notes", sm)
         for l in SUP:
             self.assertIn("https://duskblocks.ipe.rest" + ("/" if l == "en" else f"/{l}/") + "</loc>", sm)

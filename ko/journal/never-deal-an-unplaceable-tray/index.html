@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>블록핏은 놓을 곳 없는 조각을 주지 않습니다 — Dusk Blocks</title>
+<meta name="description" content="블록 퍼즐은 세 조각이 모두 안 들어가면 플레이어 잘못 없이 끝날 수 있습니다. 블록핏이 조각을 보여 주기 전에 어떻게 검사하는지 적었습니다.">
+<meta name="theme-color" content="#171a36">
+<meta name="color-scheme" content="dark">
+<link rel="canonical" href="https://duskblocks.ipe.rest/ko/journal/never-deal-an-unplaceable-tray/">
+<link rel="alternate" hreflang="en" href="https://duskblocks.ipe.rest/journal/never-deal-an-unplaceable-tray/">
+<link rel="alternate" hreflang="ko" href="https://duskblocks.ipe.rest/ko/journal/never-deal-an-unplaceable-tray/">
+<link rel="alternate" hreflang="x-default" href="https://duskblocks.ipe.rest/journal/never-deal-an-unplaceable-tray/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Dusk Blocks">
+<meta property="og:title" content="블록핏은 놓을 곳 없는 조각을 주지 않습니다 — Dusk Blocks">
+<meta property="og:description" content="블록 퍼즐은 세 조각이 모두 안 들어가면 플레이어 잘못 없이 끝날 수 있습니다. 블록핏이 조각을 보여 주기 전에 어떻게 검사하는지 적었습니다.">
+<meta property="og:url" content="https://duskblocks.ipe.rest/ko/journal/never-deal-an-unplaceable-tray/">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://duskblocks.ipe.rest/assets/og.png?v=20261113a">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="블록핏은 놓을 곳 없는 조각을 주지 않습니다 — Dusk Blocks">
+<meta name="twitter:description" content="블록 퍼즐은 세 조각이 모두 안 들어가면 플레이어 잘못 없이 끝날 수 있습니다. 블록핏이 조각을 보여 주기 전에 어떻게 검사하는지 적었습니다.">
+<meta name="twitter:image" content="https://duskblocks.ipe.rest/assets/og.png?v=20261113a">
+<link rel="icon" type="image/png" href="/assets/icon-180.png?v=20261113a">
+<link rel="apple-touch-icon" href="/assets/icon-180.png?v=20261113a">
+<link rel="stylesheet" href="/style.css?v=20261113a">
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "블록핏은 놓을 곳 없는 조각을 주지 않습니다", "description": "블록 퍼즐은 세 조각이 모두 안 들어가면 플레이어 잘못 없이 끝날 수 있습니다. 블록핏이 조각을 보여 주기 전에 어떻게 검사하는지 적었습니다.", "datePublished": "2026-11-13T22:35:00+09:00", "inLanguage": "ko", "mainEntityOfPage": "https://duskblocks.ipe.rest/ko/journal/never-deal-an-unplaceable-tray/", "author": {"@type": "Organization", "name": "ipe()", "url": "https://ipe.rest/"}, "publisher": {"@type": "Organization", "name": "ipe()", "url": "https://ipe.rest/"}}</script>
+</head>
+<body>
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+<header class="bar"><div class="wrap barin"><a class="brand" href="/ko/"><img src="/assets/icon-180.png?v=20261113a" width="32" height="32" alt=""><span>Dusk Blocks</span></a><nav class="nav" aria-label="주 메뉴"><a href="/ko/">홈</a><a href="/ko/journal/" aria-current="page">저널</a><details class="langpick"><summary aria-label="언어"><span lang="ko">한국어</span></summary><ul><li><a href="/" hreflang="en" lang="en" data-lang="en">English</a></li><li><a href="/ko/" hreflang="ko" lang="ko" data-lang="ko" aria-current="true">한국어</a></li><li><a href="/ja/" hreflang="ja" lang="ja" data-lang="ja">日本語</a></li><li><a href="/zh-Hant/" hreflang="zh-Hant" lang="zh-Hant" data-lang="zh-Hant">繁體中文</a></li><li><a href="/es/" hreflang="es" lang="es" data-lang="es">Español</a></li><li><a href="/pt-BR/" hreflang="pt-BR" lang="pt-BR" data-lang="pt-BR">Português (Brasil)</a></li><li><a href="/fr/" hreflang="fr" lang="fr" data-lang="fr">Français</a></li><li><a href="/de/" hreflang="de" lang="de" data-lang="de">Deutsch</a></li><li><a href="/id/" hreflang="id" lang="id" data-lang="id">Bahasa Indonesia</a></li><li><a href="/th/" hreflang="th" lang="th" data-lang="th">ไทย</a></li><li><a href="/vi/" hreflang="vi" lang="vi" data-lang="vi">Tiếng Việt</a></li><li><a href="/tr/" hreflang="tr" lang="tr" data-lang="tr">Türkçe</a></li></ul></details></nav></div></header>
+<main id="main"><div class="wrap jmain"><p class="rel-meta"><a href="/ko/journal/">← 전체 글</a></p><article class="jpost"><p class="rel-meta"><time datetime="2026-11-13">2026-11-13</time></p><h1>블록핏은 놓을 곳 없는 조각을 주지 않습니다</h1><p><a href="/journal/never-deal-an-unplaceable-tray/">Read in English →</a></p>
+<p>블록 퍼즐에서 가장 흔한 불만은 억울한 조각입니다. 판이 붐비는데 트레이의 세 조각이 어디에도 안 들어가서, 내가 한 일과 상관없이 게임이 끝나는 경우입니다. 블록핏을 기획하며 「공정하다」의 뜻부터 적었습니다. <strong>게임오버는 내가 놓은 선택 때문에만 생겨야 한다.</strong></p>
+<h2>비교한 세 가지</h2>
+<ul><li><strong>보장 없는 무작위.</strong> 가장 단순하지만, 피하려던 억울한 끝이 그대로 남습니다.</li><li><strong>최소 한 조각은 들어간다.</strong> 검사는 싸지만 문제를 한 수 미룰 뿐입니다. 한 조각만 들어가고 나머지 둘이 안 들어가면 한 수 뒤에 끝납니다.</li><li><strong>세 조각을 어떤 순서로든 차례로 모두 놓을 수 있다.</strong> 목표와 정확히 맞는 가장 약한 조건이라 이것을 골랐습니다. 중간에 줄이 지워져서 들어가게 되는 경우도 인정합니다.</li></ul>
+<p>판을 읽어서 플레이어에게 유리한 조각을 골라 주는 안도 있었지만 버렸습니다. 항상 「정답 조각」이 오면 긴장감이 사라집니다.</p>
+<h2>검사 방식</h2>
+<p>판은 칸마다 비트 하나인 64비트 숫자 하나로 저장합니다. 그래서 「이 조각이 여기 들어가나」, 「어느 줄이 찼나」는 비트 연산 몇 번이면 됩니다. 작은 풀이기가 세 조각을 모든 순서로, 줄 지우기까지 반영해 놓아 보고 가능/불가능을 답합니다.</p>
+<p>오늘의 판과 저장 후 이어하기가 있어서 조각 뽑기는 같은 입력이면 같은 결과여야 합니다. 그래서 규칙이 셋입니다.</p>
+<ol><li>가중 무작위로 세 조각을 뽑아 풀이기에 묻고, 불가능이면 다시 뽑습니다(최대 16번, 같은 난수 수열을 이어서 사용).</li><li>풀이기는 시간 제한 대신 탐색 횟수 상한(50,000)으로 멈춥니다. 상한에 걸리면 「증명 못 함」으로 보고 다시 뽑습니다. 폰이 빠르든 느리든 결과가 같습니다.</li><li>16번 모두 실패하면, 지금 들어가는 조각을 골라 다음 조각을 탐욕으로 검사하는 고정 규칙으로 항상 풀리는 트레이를 만듭니다.</li></ol>
+<h2>잰 결과</h2>
+<p>봇 1,000판 시뮬레이션에서 트레이 하나를 만드는 데 평균 약 1.08번 뽑았고, 대체 규칙은 탐욕 봇 기준 0.01%, 무작위 봇 0.00%의 뽑기에서만 쓰였습니다. 테스트는 트레이 2,000개를 뽑아 풀 수 없는 것이 없는지도 확인합니다. 시간은 데스크톱 VM에서 마이크로초 단위였고, 실제 폰에서는 아직 재지 않았습니다.</p></article></div></main>
+<footer class="foot"><div class="wrap"><p class="slots"><a href="/ko/journal/">저널</a><span>개인정보처리방침</span><span>이용약관</span><a href="mailto:ipe.haven@gmail.com">문의</a></p><p class="small">© 2026 Dusk Blocks · 만든 곳 <a href="https://ipe.rest/">ipe()</a></p></div></footer>
+</body>
+</html>

@@ -6,11 +6,13 @@ import struct
 import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "vendor"))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from ipe_web_kit import languages, seo  # noqa: E402
+import journal_md  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SHOTS = ["ios_01_start", "ios_02_play_start", "ios_03_dragging", "ios_04_line_clear", "ios_05_midgame", "ios_06_gameover", "ios_07_revived"]
-V = "20261111f"
+V = "20261113a"
 
 L = {}
 for _k in languages.SUPPORTED:
@@ -23,6 +25,7 @@ for _k in languages.SUPPORTED:
 OG_LOCALE = {"en": "en_US", "ko": "ko_KR", "ja": "ja_JP", "zh-Hant": "zh_TW", "es": "es_ES", "pt-BR": "pt_BR",
              "fr": "fr_FR", "de": "de_DE", "id": "id_ID", "th": "th_TH", "vi": "vi_VN", "tr": "tr_TR"}
 SITE = "https://duskblocks.ipe.rest"
+JLANGS = ("en", "ko")  # 저널 글이 있는 언어
 
 
 def url(k):
@@ -64,7 +67,12 @@ def lang_js():
             % sup)
 
 
-def header(c):
+def jurl(k):
+    """저널 목록 경로 — 글은 en·ko 만 있다. 한국어는 /ko/journal/, 나머지 언어는 영어 /journal/ 로 간다."""
+    return "/ko/journal/" if k == "ko" else "/journal/"
+
+
+def header(c, cur="home"):
     k = c["lang"]
     items = "".join(
         f'<li><a href="{url(l)}" hreflang="{languages.hreflang(l)}" lang="{languages.hreflang(l)}" data-lang="{l}"'
@@ -75,20 +83,23 @@ def header(c):
     return (f'<header class="bar"><div class="wrap barin">'
             f'<a class="brand" href="{url(k)}"><img src="/assets/icon-180.png?v={V}" width="32" height="32" alt=""><span>Dusk Blocks</span></a>'
             f'<nav class="nav" aria-label="{c["nav_label"]}">'
-            f'<a href="{url(k)}" aria-current="page">{c["home"]}</a>'
+            f'<a href="{url(k)}"{" aria-current=" + chr(34) + "page" + chr(34) if cur == "home" else ""}>{c["home"]}</a>'
+            f'<a href="{jurl(k)}"{" aria-current=" + chr(34) + "page" + chr(34) if cur == "journal" else ""}{"" if k in JLANGS else " hreflang=" + chr(34) + "en" + chr(34)}>{c["journal"]}</a>'
             f'{switch}</nav>'
             f'</div></header>')
 
 
 def footer(c):
     return (f'<footer class="foot"><div class="wrap">'
-            f'<p class="slots"><span>{c["privacy"]}</span><span>{c["terms"]}</span><a href="mailto:ipe.haven@gmail.com">{c["contact"]}</a></p>'
+            f'<p class="slots"><a href="{jurl(c["lang"])}"{"" if c["lang"] in JLANGS else " hreflang=" + chr(34) + "en" + chr(34)}>{c["journal"]}</a><span>{c["privacy"]}</span><span>{c["terms"]}</span><a href="mailto:ipe.haven@gmail.com">{c["contact"]}</a></p>'
             f'<p class="small">© 2026 Dusk Blocks · {c["more"]} <a href="https://ipe.rest/">ipe()</a></p>'
             f'</div></footer>')
 
 
-def head_common(c, title, desc, canon):
+def head_common(c, title, desc, canon, alts=None, og_type="website"):
     k = c["lang"]
+    if alts is None:
+        alts = ([(languages.hreflang(l), SITE + url(l)) for l in languages.SUPPORTED], SITE + url(languages.DEFAULT))
     return f'''<!doctype html>
 <html lang="{k}">
 <head>
@@ -99,8 +110,8 @@ def head_common(c, title, desc, canon):
 <meta name="theme-color" content="#171a36">
 <meta name="color-scheme" content="dark">
 <link rel="canonical" href="{canon}">
-{seo.alternate_links([(languages.hreflang(l), SITE + url(l)) for l in languages.SUPPORTED], x_default=SITE + url(languages.DEFAULT))}
-<meta property="og:type" content="website">
+{seo.alternate_links(alts[0], x_default=alts[1])}
+<meta property="og:type" content="{og_type}">
 <meta property="og:site_name" content="Dusk Blocks">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
@@ -175,7 +186,85 @@ for k, c in L.items():
     out = os.path.join(ROOT, "index.html" if k == languages.DEFAULT else f"{k}/index.html")
     os.makedirs(os.path.dirname(out), exist_ok=True)
     open(out, "w", encoding="utf-8").write(page(c))
+# ---- 저널: content/journal/<slug>/{en,ko}.md → /journal/ · /journal/<slug>/ · /ko/journal/ · /ko/journal/<slug>/ ----
+JT = {
+    "en": {"h1": "Journal", "lead": "Notes from making Dusk Blocks: design decisions, problems we hit, and what we measured.", "back": "All posts", "title": "Journal — Dusk Blocks", "desc": "Notes from making Dusk Blocks, a calm block puzzle for iPhone: design decisions, problems we hit, and playtests.", "by": "Dusk Blocks · ipe()"},
+    "ko": {"h1": "저널", "lead": "블록핏(Dusk Blocks)을 만들며 남기는 글. 설계 결정, 막힌 문제, 측정한 것.", "back": "전체 글", "title": "저널 — 블록핏 Dusk Blocks", "desc": "아이폰용 차분한 블록 퍼즐 블록핏(Dusk Blocks)을 만들며 남기는 글: 설계 결정, 막힌 문제, 플레이테스트.", "by": "Dusk Blocks · ipe()"},
+}
+POSTS = journal_md.load_posts(ROOT)
+
+
+def post_url(lang, slug):
+    return f"{jurl(lang)}{slug}/"
+
+
+def journal_list(lang):
+    """lang 의 글 목록(최신순): [(slug, meta, body)]."""
+    rows = [(slug, v[lang][0], v[lang][1]) for slug, v in POSTS.items() if lang in v]
+    rows.sort(key=lambda r: (r[1]["date"], r[1].get("time", "00:00")), reverse=True)
+    return rows
+
+
+def journal_alts(slug):
+    """en·ko 가 모두 있는 글만 서로 hreflang 으로 잇는다."""
+    langs = [l for l in JLANGS if slug is None or l in POSTS.get(slug, {})]
+    pairs = [(languages.hreflang(l), SITE + (post_url(l, slug) if slug else jurl(l))) for l in langs]
+    return (pairs, SITE + (post_url("en", slug) if slug else jurl("en")))
+
+
+def journal_page(lang, slug=None):
+    c = L[lang]
+    t = JT[lang]
+    if slug is None:
+        canon = SITE + jurl(lang)
+        items = "".join(
+            f'<li><article class="jitem"><p class="rel-meta"><time datetime="{m["date"]}">{m["date"]}</time></p>'
+            f'<h2><a href="{post_url(lang, s_)}">{journal_md.inline(m["title"])}</a></h2><p>{journal_md.inline(m["description"])}</p></article></li>'
+            for s_, m, _ in journal_list(lang))
+        inner = (f'<h1>{t["h1"]}</h1><p class="lead">{t["lead"]}</p><ul class="jlist">{items}</ul>')
+        head = head_common(c, t["title"], t["desc"], canon, journal_alts(None))
+        ld = ""
+    else:
+        m, body = POSTS[slug][lang]
+        canon = SITE + post_url(lang, slug)
+        inner = (f'<p class="rel-meta"><a href="{jurl(lang)}">← {t["back"]}</a></p><article class="jpost"><p class="rel-meta"><time datetime="{m["date"]}">{m["date"]}</time></p>'
+                 f'<h1>{journal_md.inline(m["title"])}</h1>{journal_md.render(body)}</article>')
+        head = head_common(c, m["title"] + " — Dusk Blocks", m["description"], canon, journal_alts(slug), "article")
+        stamp = m["date"] + ("T" + m["time"] + ":00+09:00" if m.get("time") else "")
+        ld = ('<script type="application/ld+json">' + json.dumps({
+            "@context": "https://schema.org", "@type": "Article", "headline": m["title"], "description": m["description"],
+            "datePublished": stamp, "inLanguage": lang, "mainEntityOfPage": canon,
+            "author": {"@type": "Organization", "name": "ipe()", "url": "https://ipe.rest/"},
+            "publisher": {"@type": "Organization", "name": "ipe()", "url": "https://ipe.rest/"}}, ensure_ascii=False) + "</script>")
+    return f'''{head}
+{ld}
+</head>
+<body>
+<a class="skip" href="#main">{c["skip"]}</a>
+{header(c, "journal")}
+<main id="main"><div class="wrap jmain">{inner}</div></main>
+{footer(c)}
+</body>
+</html>
+'''
+
+
+JOURNAL_URLS = []
+for lang in JLANGS:
+    base = "" if lang == languages.DEFAULT else lang + "/"
+    for slug, v in POSTS.items():
+        if lang in v:
+            d = os.path.join(ROOT, base + "journal", slug)
+            os.makedirs(d, exist_ok=True)
+            open(os.path.join(d, "index.html"), "w", encoding="utf-8").write(journal_page(lang, slug))
+            JOURNAL_URLS.append(post_url(lang, slug))
+    d = os.path.join(ROOT, base + "journal")
+    os.makedirs(d, exist_ok=True)
+    open(os.path.join(d, "index.html"), "w", encoding="utf-8").write(journal_page(lang))
+    JOURNAL_URLS.insert(0, jurl(lang))
+
 open(os.path.join(ROOT, "sitemap.xml"), "w").write(
     '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-    + "".join(f"<url><loc>{SITE}{url(l)}</loc></url>\n" for l in languages.SUPPORTED) + "</urlset>\n")
+    + "".join(f"<url><loc>{SITE}{url(l)}</loc></url>\n" for l in languages.SUPPORTED)
+    + "".join(f"<url><loc>{SITE}{u}</loc></url>\n" for u in JOURNAL_URLS) + "</urlset>\n")
 print("ok")

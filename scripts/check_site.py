@@ -153,6 +153,41 @@ for rel, lang in PAGES.items():
         if m and abs(int(m[1]) / int(m[2]) - size[0] / size[1]) > 0.01 * size[0] / size[1]:
             fail(f"{rel}: {src} aspect-ratio 가 실제 PNG {size} 와 다르다")
 
+# 저널 페이지: lang·로컬 참조·hreflang(en/ko 쌍만)·캐시버스팅·사이트맵 포함
+sm = open(os.path.join(ROOT, "sitemap.xml"), encoding="utf-8").read()
+JPAGES = []
+for _l in ("en", "ko"):
+    _b = "" if _l == "en" else "ko/"
+    _d = os.path.join(ROOT, _b + "journal")
+    if not os.path.isdir(_d):
+        fail(f"{_b}journal/: 저널이 없다")
+        continue
+    JPAGES.append((_b + "journal/index.html", _l))
+    for _s in sorted(os.listdir(_d)):
+        if os.path.isfile(os.path.join(_d, _s, "index.html")):
+            JPAGES.append((f"{_b}journal/{_s}/index.html", _l))
+for rel, lang in JPAGES:
+    html = open(os.path.join(ROOT, rel), encoding="utf-8").read()
+    p = Page()
+    p.feed(html)
+    if p.lang != lang:
+        fail(f"{rel}: html lang={p.lang!r}, 기대값 {lang!r}")
+    if not p.hreflangs <= {"en", "ko", "x-default"} or "x-default" not in p.hreflangs:
+        fail(f"{rel}: 저널 hreflang 은 en·ko·x-default 만 — {sorted(p.hreflangs)}")
+    if "/style.css?v=" not in html:
+        fail(f"{rel}: style.css 에 ?v= 캐시버스팅이 없다")
+    for ref in p.refs:
+        target = local_path(ref)
+        if target and not os.path.exists(target):
+            fail(f"{rel}: 깨진 로컬 참조 {ref}")
+    if "<h1>" not in html:
+        fail(f"{rel}: h1 이 없다")
+    loc = "/" + rel[: -len("index.html")]
+    if f"<loc>https://duskblocks.ipe.rest{loc}</loc>" not in sm:
+        fail(f"{rel}: sitemap.xml 에 없다")
+    if lang == "ko" and not HANGUL.search(" ".join(p.text)):
+        fail(f"{rel}: 한글 문구가 없다")
+
 # 번역 문구 파일: 키 일치 + 영어 그대로인 값(번역 누락) 검출
 import json
 en = json.load(open(os.path.join(ROOT, "content", "i18n", "en.json"), encoding="utf-8"))
@@ -168,4 +203,4 @@ for l in languages.SUPPORTED:
 if errors:
     print("\n".join(f"FAIL: {e}" for e in errors))
     sys.exit(1)
-print(f"ok: {len(PAGES)} pages checked")
+print(f"ok: {len(PAGES)} pages + {len(JPAGES)} journal pages checked")

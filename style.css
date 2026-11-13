@@ -77,9 +77,21 @@ h2{margin:0 0 24px;font-size:30px;line-height:1.2}
 .sub{font-size:22px;margin:0}
 .rn{margin:12px 0 0;padding-left:20px;color:var(--text-2)}.rn li{margin:8px 0}
 .cta{margin-top:28px}
+.jmain{padding-top:40px;padding-bottom:8px;max-width:720px}
+.jmain h1{font-size:34px;margin:8px 0 0}
+.jlist{list-style:none;margin:24px 0 0;padding:0}
+.jitem{background:var(--surface);border:1px solid var(--line);border-radius:var(--rl);padding:20px;margin-top:16px;box-shadow:var(--shadow)}
+.jitem h2{font-size:22px;margin:6px 0 8px}
+.jitem h2 a{color:var(--text)}
+.jitem p{margin:0;color:var(--text-2);line-height:1.6}
+.jitem .rel-meta{margin:0}
+.jpost h2{font-size:24px;margin:32px 0 8px}.jpost h3{font-size:19px;margin:24px 0 6px}
+.jpost p,.jpost li{line-height:1.75;color:var(--text-2);overflow-wrap:anywhere}
+.jpost ul,.jpost ol{padding-left:22px}.jpost li{margin:8px 0}
+.jpost a{color:var(--accent)}.jpost code{font-size:.92em}
 .small{color:var(--text-dim)}
 @media(min-width:768px){
-h1{font-size:56px}.lead{font-size:18px}
+h1{font-size:56px}.lead{font-size:18px}.jmain h1{font-size:44px}
 .sec{padding-top:80px}
 h2{font-size:30px}
 .hero{grid-template-columns:55fr 45fr;align-items:center;padding-top:64px}

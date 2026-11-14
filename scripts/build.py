@@ -2,17 +2,18 @@
 """Generate the home page for the 12 shared languages (ipe_web_kit.languages) and sitemap.xml. Run: python3 scripts/build.py"""
 import json
 import os
+import re
 import struct
 import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "vendor"))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from ipe_web_kit import languages, seo  # noqa: E402
+from ipe_web_kit import languages, langswitch, seo  # noqa: E402
 import journal_md  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SHOTS = ["ios_01_start", "ios_02_play_start", "ios_03_dragging", "ios_04_line_clear", "ios_05_midgame", "ios_06_gameover", "ios_07_revived"]
-V = "20261113a"
+V = "20261114a"
 
 L = {}
 for _k in languages.SUPPORTED:
@@ -25,7 +26,11 @@ for _k in languages.SUPPORTED:
 OG_LOCALE = {"en": "en_US", "ko": "ko_KR", "ja": "ja_JP", "zh-Hant": "zh_TW", "es": "es_ES", "pt-BR": "pt_BR",
              "fr": "fr_FR", "de": "de_DE", "id": "id_ID", "th": "th_TH", "vi": "vi_VN", "tr": "tr_TR"}
 SITE = "https://duskblocks.ipe.rest"
-JLANGS = ("en", "ko")  # 저널 글이 있는 언어
+OPERATOR = "Davy Kim (ipe Studio)"
+EMAIL = "ipe.haven@gmail.com"
+EFFECTIVE = "2026-11-14"
+LEGAL = ("privacy", "terms")
+LS = langswitch.copy_assets(os.path.join(ROOT, "assets"))  # assets/ipe-lang.js (?v= 주소)
 
 
 def url(k):
@@ -55,48 +60,38 @@ def screens(k):
     return out
 
 
-def lang_js():
-    """첫 방문(영어 주소) 한 번만 브라우저 언어로 보낸다 — 규칙은 languages.resolve 와 같다. 선택기에서 고른 언어는 기억한다."""
-    sup = json.dumps(list(languages.SUPPORTED))
-    return ("<script>(function(){try{var S=%s,K='ipe_lang',p=location.pathname;"
-            "document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[data-lang]');if(a){try{localStorage.setItem(K,a.getAttribute('data-lang'))}catch(x){}}});"
-            "if(p!=='/')return;var st=null;try{st=localStorage.getItem(K)}catch(x){}if(st)return;"
-            "function R(t){var q=String(t||'').toLowerCase().split(/[-_]/),c=q[0]==='in'?'id':q[0],r=q.slice(1),i;if(c==='zh'){var sc=r.filter(function(x){return x.length===4})[0],rg=r.filter(function(x){return x.length===2})[0];"
-            "return(sc==='hant'||(!sc&&['tw','hk','mo'].indexOf(rg)>-1))?'zh-Hant':'en'}if(c==='pt')return'pt-BR';for(i=0;i<S.length;i++)if(S[i].toLowerCase()===c)return S[i];return'en'}"
-            "var L=navigator.languages&&navigator.languages.length?navigator.languages:[navigator.language];for(var i=0;i<L.length;i++){var g=R(L[i]);if(g!=='en'){location.replace('/'+g+'/');return}if(String(L[i]).toLowerCase().split(/[-_]/)[0]==='en')return}}catch(x){}})()</script>"
-            % sup)
-
-
 def jurl(k):
-    """저널 목록 경로 — 글은 en·ko 만 있다. 한국어는 /ko/journal/, 나머지 언어는 영어 /journal/ 로 간다."""
-    return "/ko/journal/" if k == "ko" else "/journal/"
+    """저널 목록 경로 — 12개 언어 모두 목록 페이지가 있다(글이 없는 언어는 안내 + 영어 글 목록)."""
+    return "/journal/" if k == languages.DEFAULT else f"/{k}/journal/"
 
 
-def header(c, cur="home"):
+def lurl(k, kind):
+    """약관·개인정보 페이지 경로."""
+    return f"/{kind}/" if k == languages.DEFAULT else f"/{k}/{kind}/"
+
+
+def header(c, cur="home", href=url):
+    """헤더: 홈·저널 링크 + 언어 select 하나(kit langswitch). 약관·개인정보는 푸터에만 둔다. href(l) = 그 언어의 같은 페이지."""
     k = c["lang"]
-    items = "".join(
-        f'<li><a href="{url(l)}" hreflang="{languages.hreflang(l)}" lang="{languages.hreflang(l)}" data-lang="{l}"'
-        f'{" aria-current=" + chr(34) + "true" + chr(34) if l == k else ""}>{languages.NAMES[l]}</a></li>'
-        for l in languages.SUPPORTED)
-    switch = (f'<details class="langpick"><summary aria-label="{c["lang_label"]}"><span lang="{k}">{languages.NAMES[k]}</span></summary>'
-              f'<ul>{items}</ul></details>')
+    cur_attr = lambda n, v: f' aria-current="{v}"' if cur == n else ""
     return (f'<header class="bar"><div class="wrap barin">'
             f'<a class="brand" href="{url(k)}"><img src="/assets/icon-180.png?v={V}" width="32" height="32" alt=""><span>Dusk Blocks</span></a>'
             f'<nav class="nav" aria-label="{c["nav_label"]}">'
-            f'<a href="{url(k)}"{" aria-current=" + chr(34) + "page" + chr(34) if cur == "home" else ""}>{c["home"]}</a>'
-            f'<a href="{jurl(k)}"{" aria-current=" + chr(34) + "page" + chr(34) if cur == "journal" else ""}{"" if k in JLANGS else " hreflang=" + chr(34) + "en" + chr(34)}>{c["journal"]}</a>'
-            f'{switch}</nav>'
+            f'<a href="{url(k)}"{cur_attr("home", "page")}>{c["home"]}</a>'
+            f'<a href="{jurl(k)}"{cur_attr("journal", "page")}>{c["journal"]}</a>'
+            f'{langswitch.select_html(k, href)}</nav>'
             f'</div></header>')
 
 
 def footer(c):
+    k = c["lang"]
     return (f'<footer class="foot"><div class="wrap">'
-            f'<p class="slots"><a href="{jurl(c["lang"])}"{"" if c["lang"] in JLANGS else " hreflang=" + chr(34) + "en" + chr(34)}>{c["journal"]}</a><span>{c["privacy"]}</span><span>{c["terms"]}</span><a href="mailto:ipe.haven@gmail.com">{c["contact"]}</a></p>'
+            f'<p class="slots"><a href="{jurl(k)}">{c["journal"]}</a><a href="{lurl(k, "privacy")}">{c["privacy"]}</a><a href="{lurl(k, "terms")}">{c["terms"]}</a><a href="mailto:{EMAIL}">{c["contact"]}</a></p>'
             f'<p class="small">© 2026 Dusk Blocks · {c["more"]} <a href="https://ipe.rest/">ipe()</a></p>'
             f'</div></footer>')
 
 
-def head_common(c, title, desc, canon, alts=None, og_type="website"):
+def head_common(c, title, desc, canon, alts=None, og_type="website", root_script=False):
     k = c["lang"]
     if alts is None:
         alts = ([(languages.hreflang(l), SITE + url(l)) for l in languages.SUPPORTED], SITE + url(languages.DEFAULT))
@@ -127,7 +122,7 @@ def head_common(c, title, desc, canon, alts=None, og_type="website"):
 <link rel="icon" type="image/png" href="/assets/icon-180.png?v={V}">
 <link rel="apple-touch-icon" href="/assets/icon-180.png?v={V}">
 <link rel="stylesheet" href="/style.css?v={V}">
-{lang_js() if k == languages.DEFAULT else ""}'''
+{langswitch.script(LS, redirect=True) if root_script else ""}'''
 
 
 def img(folder, name, w, h, alt, loading, cls=""):
@@ -155,7 +150,7 @@ def page(c):
                f'<div class="gal wrap">{figs}</div></section>') if figs else ""
     ld = ('{"@context":"https://schema.org","@type":"VideoGame","name":"Dusk Blocks","url":"%s","description":"%s","inLanguage":"%s","genre":"Puzzle","gamePlatform":"iOS","applicationCategory":"GameApplication","playMode":"SinglePlayer","image":"https://duskblocks.ipe.rest/assets/og.png","creator":{"@type":"Organization","name":"ipe()","url":"https://ipe.rest/"}}'
           % (canon, c["short"].replace('"', ''), k))
-    return f'''{head_common(c, c["title"], c["desc"], canon)}
+    return f'''{head_common(c, c["title"], c["desc"], canon, root_script=(k == languages.DEFAULT))}
 <script type="application/ld+json">{ld}</script>
 </head>
 <body>
@@ -186,12 +181,63 @@ for k, c in L.items():
     out = os.path.join(ROOT, "index.html" if k == languages.DEFAULT else f"{k}/index.html")
     os.makedirs(os.path.dirname(out), exist_ok=True)
     open(out, "w", encoding="utf-8").write(page(c))
-# ---- 저널: content/journal/<slug>/{en,ko}.md → /journal/ · /journal/<slug>/ · /ko/journal/ · /ko/journal/<slug>/ ----
+# ---- 약관·개인정보: content/pages/<lang>/{privacy,terms}.md → /privacy/ · /terms/ · /<lang>/privacy/ · /<lang>/terms/ ----
+def load_legal():
+    out = {}
+    for k in languages.SUPPORTED:
+        for kind in LEGAL:
+            f = os.path.join(ROOT, "content", "pages", k, kind + ".md")
+            if not os.path.isfile(f):
+                sys.exit(f"missing legal page: content/pages/{k}/{kind}.md")
+            meta, body = journal_md.parse(open(f, encoding="utf-8").read())
+            fill = lambda t: (t.replace("{{OPERATOR}}", OPERATOR).replace("{{EMAIL}}", EMAIL)
+                              .replace("{{EFFECTIVE}}", EFFECTIVE).replace("{{SITE}}", SITE))
+            out[(k, kind)] = ({m: fill(v) for m, v in meta.items()}, fill(body))
+    return out
+
+
+LEGAL_PAGES = load_legal()
+
+
+def legal_page(lang, kind):
+    c = L[lang]
+    m, body = LEGAL_PAGES[(lang, kind)]
+    canon = SITE + lurl(lang, kind)
+    alts = ([(languages.hreflang(l), SITE + lurl(l, kind)) for l in languages.SUPPORTED], SITE + lurl(languages.DEFAULT, kind))
+    head = head_common(c, m["title"] + " — Dusk Blocks", m["description"], canon, alts)
+    href = lambda l: lurl(l, kind)
+    return f'''{head}
+</head>
+<body>
+<a class="skip" href="#main">{c["skip"]}</a>
+{header(c, "", href)}
+<main id="main"><div class="wrap jmain"><article class="jpost"><h1>{journal_md.inline(m["title"])}</h1><p class="rel-meta"><time datetime="{m["updated"]}">{m["updated"]}</time></p>{journal_md.render(body)}</article></div></main>
+{footer(c)}
+</body>
+</html>
+'''
+
+
+for lang in languages.SUPPORTED:
+    for kind in LEGAL:
+        out = os.path.join(ROOT, lurl(lang, kind).strip("/"), "index.html")
+        os.makedirs(os.path.dirname(out), exist_ok=True)
+        open(out, "w", encoding="utf-8").write(legal_page(lang, kind))
+
+# ---- 저널: content/journal/<slug>/<lang>.md → /journal/ · /journal/<slug>/ · /<lang>/journal/ · /<lang>/journal/<slug>/ ----
+# en·ko 는 원문, 나머지 10개 언어판은 번역 — copy_review(iris)가 있는 것만 읽혀 발행된다(journal_md.load_posts). 글 없는 언어는 목록 페이지에 안내 + 영어 글 목록.
 JT = {
     "en": {"h1": "Journal", "lead": "Notes from making Dusk Blocks: design decisions, problems we hit, and what we measured.", "back": "All posts", "title": "Journal — Dusk Blocks", "desc": "Notes from making Dusk Blocks, a calm block puzzle for iPhone: design decisions, problems we hit, and playtests.", "by": "Dusk Blocks · ipe()"},
     "ko": {"h1": "저널", "lead": "블록핏(Dusk Blocks)을 만들며 남기는 글. 설계 결정, 막힌 문제, 측정한 것.", "back": "전체 글", "title": "저널 — 블록핏 Dusk Blocks", "desc": "아이폰용 차분한 블록 퍼즐 블록핏(Dusk Blocks)을 만들며 남기는 글: 설계 결정, 막힌 문제, 플레이테스트.", "by": "Dusk Blocks · ipe()"},
 }
 POSTS = journal_md.load_posts(ROOT)
+
+
+def jt(lang):
+    if lang in JT:
+        return JT[lang]
+    c = L[lang]
+    return {"h1": c["journal"], "lead": c["j_note"], "back": c["journal"], "title": c["journal"] + " — Dusk Blocks", "desc": c["j_note"]}
 
 
 def post_url(lang, slug):
@@ -206,24 +252,37 @@ def journal_list(lang):
 
 
 def journal_alts(slug):
-    """en·ko 가 모두 있는 글만 서로 hreflang 으로 잇는다."""
-    langs = [l for l in JLANGS if slug is None or l in POSTS.get(slug, {})]
-    pairs = [(languages.hreflang(l), SITE + (post_url(l, slug) if slug else jurl(l))) for l in langs]
-    return (pairs, SITE + (post_url("en", slug) if slug else jurl("en")))
+    """slug=None: 12개 목록 페이지끼리. 글: 그 글의 언어판끼리(번역이 없는 언어는 잇지 않는다)."""
+    if slug is None:
+        pairs = [(languages.hreflang(l), SITE + jurl(l)) for l in languages.SUPPORTED]
+        return (pairs, SITE + jurl("en"))
+    langs = [l for l in languages.SUPPORTED if l in POSTS.get(slug, {})]
+    return ([(languages.hreflang(l), SITE + post_url(l, slug)) for l in langs], SITE + post_url("en", slug))
+
+
+def item(lang, s_, m):
+    en = ' hreflang="en" lang="en"' if lang != "en" and m.get("lang") == "en" and lang not in POSTS[s_] else ""
+    return (f'<li><article class="jitem"><p class="rel-meta"><time datetime="{m["date"]}">{m["date"]}</time></p>'
+            f'<h2><a href="{post_url(lang if lang in POSTS[s_] else "en", s_)}"{en}>{journal_md.inline(m["title"])}</a></h2><p>{journal_md.inline(m["description"])}</p></article></li>')
 
 
 def journal_page(lang, slug=None):
     c = L[lang]
-    t = JT[lang]
+    t = jt(lang)
     if slug is None:
         canon = SITE + jurl(lang)
-        items = "".join(
-            f'<li><article class="jitem"><p class="rel-meta"><time datetime="{m["date"]}">{m["date"]}</time></p>'
-            f'<h2><a href="{post_url(lang, s_)}">{journal_md.inline(m["title"])}</a></h2><p>{journal_md.inline(m["description"])}</p></article></li>'
-            for s_, m, _ in journal_list(lang))
-        inner = (f'<h1>{t["h1"]}</h1><p class="lead">{t["lead"]}</p><ul class="jlist">{items}</ul>')
+        own = journal_list(lang)
+        own_slugs = {s_ for s_, _, _ in own}
+        others = [(s_, m) for s_, m, _ in journal_list("en") if s_ not in own_slugs] if lang != "en" else []
+        items = "".join(item(lang, s_, m) for s_, m, _ in own)
+        extra = ""
+        if others:
+            extra = (f'<h2 class="jen" lang="{lang}">{c["j_en"]}</h2><ul class="jlist">' + "".join(item(lang, s_, m) for s_, m in others) + "</ul>")
+        lead = f'<p class="lead">{t["lead"]}</p>' if lang in JT else (f'<p class="note">{c["j_note"]}</p>' if others else "")
+        inner = f'<h1>{t["h1"]}</h1>{lead}{"<ul class=" + chr(34) + "jlist" + chr(34) + ">" + items + "</ul>" if items else ""}{extra}'
         head = head_common(c, t["title"], t["desc"], canon, journal_alts(None))
         ld = ""
+        href = jurl
     else:
         m, body = POSTS[slug][lang]
         canon = SITE + post_url(lang, slug)
@@ -236,12 +295,13 @@ def journal_page(lang, slug=None):
             "datePublished": stamp, "inLanguage": lang, "mainEntityOfPage": canon,
             "author": {"@type": "Organization", "name": "ipe()", "url": "https://ipe.rest/"},
             "publisher": {"@type": "Organization", "name": "ipe()", "url": "https://ipe.rest/"}}, ensure_ascii=False) + "</script>")
+        href = lambda l, slug=slug: post_url(l, slug) if l in POSTS[slug] else jurl(l)
     return f'''{head}
 {ld}
 </head>
 <body>
 <a class="skip" href="#main">{c["skip"]}</a>
-{header(c, "journal")}
+{header(c, "journal", href)}
 <main id="main"><div class="wrap jmain">{inner}</div></main>
 {footer(c)}
 </body>
@@ -250,7 +310,7 @@ def journal_page(lang, slug=None):
 
 
 JOURNAL_URLS = []
-for lang in JLANGS:
+for lang in languages.SUPPORTED:
     base = "" if lang == languages.DEFAULT else lang + "/"
     for slug, v in POSTS.items():
         if lang in v:
@@ -263,8 +323,9 @@ for lang in JLANGS:
     open(os.path.join(d, "index.html"), "w", encoding="utf-8").write(journal_page(lang))
     JOURNAL_URLS.insert(0, jurl(lang))
 
+LEGAL_URLS = [lurl(l, kind) for kind in LEGAL for l in languages.SUPPORTED]
 open(os.path.join(ROOT, "sitemap.xml"), "w").write(
     '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     + "".join(f"<url><loc>{SITE}{url(l)}</loc></url>\n" for l in languages.SUPPORTED)
-    + "".join(f"<url><loc>{SITE}{u}</loc></url>\n" for u in JOURNAL_URLS) + "</urlset>\n")
+    + "".join(f"<url><loc>{SITE}{u}</loc></url>\n" for u in JOURNAL_URLS + LEGAL_URLS) + "</urlset>\n")
 print("ok")

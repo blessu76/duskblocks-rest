@@ -12,6 +12,9 @@ import shutil
 import subprocess
 import sys
 
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "scripts"))
+import journal_md  # noqa: E402
+
 REPO = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 
 
@@ -31,6 +34,32 @@ def stamp(text, date, hhmm):
         if l.startswith("title:"):
             out += [f"date: {date}", f'time: "{hhmm}"']
     return "\n".join(out) + sep + rest
+
+
+def editions(folder):
+    """발행할 언어판 [(lang, text)] — en·ko 원문은 필수, 나머지 10개 언어는 copy_review(iris)가 있는 것만(없으면 건너뛴다)."""
+    out = []
+    for lang in ("en", "ko"):
+        with open(os.path.join(folder, lang + ".md"), encoding="utf-8") as f:
+            out.append((lang, f.read()))
+    for f in sorted(os.listdir(folder)):
+        lang = f[:-3]
+        if not f.endswith(".md") or lang in journal_md.ORIGINALS:
+            continue
+        with open(os.path.join(folder, f), encoding="utf-8") as fh:
+            text = fh.read()
+        meta, _ = journal_md.parse(text)
+        if lang in languages_supported() and journal_md.is_reviewed(meta, lang):
+            out.append((lang, text))
+        else:
+            print(f"SKIP {folder}/{f}: copy_review(iris) 없음 또는 지원 언어 아님 — 발행하지 않는다", file=sys.stderr)
+    return out
+
+
+def languages_supported():
+    sys.path.insert(0, os.path.join(REPO, "vendor"))
+    from ipe_web_kit import languages
+    return languages.SUPPORTED
 
 
 def sh(*cmd):
@@ -53,10 +82,7 @@ def main():
     slug = name.split("-", 1)[1]
     dst = os.path.join(REPO, "content", "journal", slug)
     os.makedirs(dst, exist_ok=True)
-    for lang in ("en", "ko"):
-        src = os.path.join(a.queue, name, lang + ".md")
-        with open(src, encoding="utf-8") as f:
-            text = f.read()
+    for lang, text in editions(os.path.join(a.queue, name)):
         with open(os.path.join(dst, lang + ".md"), "w", encoding="utf-8") as f:
             f.write(stamp(text, a.date, a.time))
     try:

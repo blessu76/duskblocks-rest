@@ -82,5 +82,7 @@
  "terms": "Điều khoản",
  "nav_label": "Menu chính",
  "lang_label": "Ngôn ngữ",
- "journal": "Nhật ký"
+ "journal": "Nhật ký",
+ "j_note": "Bài viết được viết bằng tiếng Anh và tiếng Hàn. Bản dịch sẽ xuất hiện ở đây sau khi được rà soát.",
+ "j_en": "Bằng tiếng Anh"
 }

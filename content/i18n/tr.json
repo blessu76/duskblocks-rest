@@ -82,5 +82,7 @@
  "terms": "Koşullar",
  "nav_label": "Ana menü",
  "lang_label": "Dil",
- "journal": "Günlük"
+ "journal": "Günlük",
+ "j_note": "Yazılar İngilizce ve Korece yazılır. Çeviriler gözden geçirildikten sonra burada yer alır.",
+ "j_en": "İngilizce yazılar"
 }

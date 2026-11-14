@@ -40,11 +40,12 @@ class SharedLanguages(unittest.TestCase):
             self.assertIn(f'<html lang="{l}">', html)
             hl = re.findall(r'<link rel="alternate" hreflang="([^"]+)"', html)
             self.assertEqual(hl, list(SUP) + ["x-default"], l)
-            self.assertEqual(re.findall(r'data-lang="([^"]+)"', html), list(SUP), l)
+            self.assertEqual(html.count("<select"), 1, l)
+            self.assertEqual(re.findall(r'<option value="[^"]+" lang="([^"]+)"', html), list(SUP), l)
 
     def test_sitemap_lists_every_page(self):
         sm = (REPO / "sitemap.xml").read_text(encoding="utf-8")
-        home = [u for u in re.findall(r"<loc>([^<]+)</loc>", sm) if "/journal/" not in u]
+        home = [u for u in re.findall(r"<loc>([^<]+)</loc>", sm) if "/journal/" not in u and not u.rstrip("/").endswith(("terms", "privacy"))]
         self.assertEqual(len(home), len(SUP))
         self.assertNotIn("release-notes", sm)
         for l in SUP:

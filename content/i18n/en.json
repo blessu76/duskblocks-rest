@@ -82,5 +82,7 @@
  "terms": "Terms",
  "nav_label": "Main",
  "lang_label": "Language",
- "journal": "Journal"
+ "journal": "Journal",
+ "j_note": "Posts are written in English and Korean. Translations appear here after review.",
+ "j_en": "In English"
 }

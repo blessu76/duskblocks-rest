@@ -3,6 +3,19 @@ import html
 import os
 import re
 
+ORIGINALS = ("en", "ko")  # 손으로 쓴 원문 — 나머지 10개 언어판은 번역이라 Iris 카피 검수(copy_review)가 있어야 발행한다
+_REVIEW = re.compile(r"iris \d{4}-\d{2}-\d{2}")
+
+
+def is_reviewed(meta, lang):
+    """이 언어판을 발행해도 되는가 — 원문(en·ko)이거나 `copy_review: iris YYYY-MM-DD`(또는 copy_review: iris + copy_review_date)가 있다."""
+    if lang in ORIGINALS:
+        return True
+    cr = str(meta.get("copy_review") or "").strip().lower()
+    if _REVIEW.fullmatch(cr):
+        return True
+    return cr == "iris" and bool(re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(meta.get("copy_review_date") or "")))
+
 
 def parse(text):
     """Split `---` front matter (flat `key: value`, optional quotes) from the body. Returns (meta, body)."""
@@ -70,8 +83,8 @@ def render(body):
     return "\n".join(out)
 
 
-def load_posts(root):
-    """Return {slug: {lang: (meta, body)}} from content/journal/<slug>/<lang>.md."""
+def load_posts(root, only_reviewed=True):
+    """Return {slug: {lang: (meta, body)}} from content/journal/<slug>/<lang>.md — 검수 안 된 번역판은 빼고(only_reviewed) 경고한다."""
     base = os.path.join(root, "content", "journal")
     posts = {}
     if not os.path.isdir(base):
@@ -83,5 +96,9 @@ def load_posts(root):
         for f in sorted(os.listdir(d)):
             if f.endswith(".md"):
                 meta, body = parse(open(os.path.join(d, f), encoding="utf-8").read())
+                if only_reviewed and not is_reviewed(meta, f[:-3]):
+                    import sys
+                    print(f"WARN: {slug}/{f} 은 copy_review(iris)가 없어 발행에서 뺐다", file=sys.stderr)
+                    continue
                 posts.setdefault(slug, {})[f[:-3]] = (meta, body)
     return posts

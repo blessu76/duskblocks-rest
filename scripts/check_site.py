@@ -240,8 +240,17 @@ for rel, lang, kind in JPAGES + LPAGES:
     if "{{" in html:
         fail(f"{rel}: 치환 안 된 자리표시자 {{{{")
     loc = "/" + rel[: -len("index.html")]
-    if f"<loc>https://duskblocks.ipe.rest{loc}</loc>" not in sm:
-        fail(f"{rel}: sitemap.xml 에 없다")
+    thin = kind == "list" and not any(lang in v and journal_md.is_reviewed(v[lang][0], lang) for v in SRC.values())
+    in_sm = f"<loc>https://duskblocks.ipe.rest{loc}</loc>" in sm
+    has_noindex = 'name="robots" content="noindex' in html
+    if thin:
+        if in_sm or not has_noindex:
+            fail(f"{rel}: 자기 언어 글이 0개인 저널 목록은 noindex 이고 sitemap.xml 에서 빠져야 한다(thin content)")
+    else:
+        if not in_sm:
+            fail(f"{rel}: sitemap.xml 에 없다")
+        if has_noindex:
+            fail(f"{rel}: 글이 있는 페이지에 noindex 가 있다")
     if lang == "ko" and not HANGUL.search(" ".join(p.text)):
         fail(f"{rel}: 한글 문구가 없다")
 if not os.path.isfile(os.path.join(ROOT, "assets", "ipe-lang.js")):
@@ -265,6 +274,25 @@ for l in languages.SUPPORTED:
         for key in ("title", "desc", "lead", "short"):
             if d.get(key) == en[key]:
                 fail(f"i18n/{l}.json: {key} 가 영어 그대로")
+# 금지어 회귀 검사: 보상형 광고(rewarded ad) 언급은 부정 문구(없음)까지 사이트에서 뺀다 — Davy 2026-11-15 결정(문서 정본은 _ipe/foundry/F-028)
+FORBIDDEN = re.compile("|".join([
+    r"rewarded", r"reward(?:ed)? ads?", r"보상형", r"보상\s*광고", r"광고\s*보고",
+    r"Prämienwerbung", r"Belohnungswerbung", r"リワード広告", r"報酬型広告", r"動画広告",
+    r"anuncios? con recompensa", r"anuncios? recompensados?", r"anúncios? com recompensa", r"anúncios? recompensados?",
+    r"publicités? récompensées?", r"publicités? avec récompense", r"pubblicità con ricompensa",
+    r"Ödüllü reklam", r"iklan berhadiah", r"quảng cáo thưởng", r"quảng cáo có thưởng",
+    r"โฆษณาแลกรางวัล", r"โฆษณาแบบมีรางวัล", r"獎勵式廣告", r"獎勵廣告", r"奖励广告", r"激励广告",
+    r"reklamy? z nagrod", r"реклам[аыу]? с наград", r"إعلانات? مكافئ",
+]), re.IGNORECASE)
+_scan = [os.path.join(ROOT, "content", "i18n", f) for f in os.listdir(os.path.join(ROOT, "content", "i18n"))]
+for _dp, _dn, _fn in os.walk(ROOT):
+    _dn[:] = [x for x in _dn if x not in (".git", "vendor", "node_modules", "ops")]
+    _scan += [os.path.join(_dp, f) for f in _fn if f.endswith((".html", ".md", ".xml", ".txt"))]
+for _f in sorted(set(_scan)):
+    _t = open(_f, encoding="utf-8", errors="ignore").read()
+    _m = FORBIDDEN.search(_t)
+    if _m:
+        fail(f"{os.path.relpath(_f, ROOT)}: 금지어 「{_m.group(0)}」 — 보상형 광고 문구(부정형 포함)는 사이트에 두지 않는다")
 if errors:
     print("\n".join(f"FAIL: {e}" for e in errors))
     sys.exit(1)

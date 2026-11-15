@@ -12,7 +12,6 @@
  "chips": [
   "One-handed play",
   "Daily puzzle",
-  "No rewarded ads",
   "12 languages"
  ],
  "feats": [
@@ -58,7 +57,7 @@
   ],
   [
    "Continue if you want to.",
-   "Pick up where you stopped. Dusk Blocks has no rewarded ads."
+   "Pick up where you stopped."
   ]
  ],
  "alts": [

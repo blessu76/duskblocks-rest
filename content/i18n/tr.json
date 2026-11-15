@@ -12,7 +12,6 @@
  "chips": [
   "Tek elle oynama",
   "Günlük bulmaca",
-  "Ödüllü reklam yok",
   "12 dil"
  ],
  "feats": [
@@ -58,7 +57,7 @@
   ],
   [
    "İstersen devam et.",
-   "Kaldığın yerden devam et. Dusk Blocks'ta ödüllü reklam yok."
+   "Kaldığın yerden devam et."
   ]
  ],
  "alts": [

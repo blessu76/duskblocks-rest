@@ -91,7 +91,7 @@ def footer(c):
             f'</div></footer>')
 
 
-def head_common(c, title, desc, canon, alts=None, og_type="website", root_script=False):
+def head_common(c, title, desc, canon, alts=None, og_type="website", root_script=False, noindex=False):
     k = c["lang"]
     if alts is None:
         alts = ([(languages.hreflang(l), SITE + url(l)) for l in languages.SUPPORTED], SITE + url(languages.DEFAULT))
@@ -105,7 +105,7 @@ def head_common(c, title, desc, canon, alts=None, og_type="website", root_script
 <meta name="theme-color" content="#171a36">
 <meta name="color-scheme" content="dark">
 <link rel="canonical" href="{canon}">
-{seo.alternate_links(alts[0], x_default=alts[1])}
+{'<meta name="robots" content="noindex,follow">' + chr(10) if noindex else ""}{seo.alternate_links(alts[0], x_default=alts[1])}
 <meta property="og:type" content="{og_type}">
 <meta property="og:site_name" content="Dusk Blocks">
 <meta property="og:title" content="{title}">
@@ -280,7 +280,7 @@ def journal_page(lang, slug=None):
             extra = (f'<h2 class="jen" lang="{lang}">{c["j_en"]}</h2><ul class="jlist">' + "".join(item(lang, s_, m) for s_, m in others) + "</ul>")
         lead = f'<p class="lead">{t["lead"]}</p>' if lang in JT else (f'<p class="note">{c["j_note"]}</p>' if others else "")
         inner = f'<h1>{t["h1"]}</h1>{lead}{"<ul class=" + chr(34) + "jlist" + chr(34) + ">" + items + "</ul>" if items else ""}{extra}'
-        head = head_common(c, t["title"], t["desc"], canon, journal_alts(None))
+        head = head_common(c, t["title"], t["desc"], canon, journal_alts(None), noindex=not own)  # 자기 언어 글이 0개인 목록 = thin content → noindex·사이트맵 제외
         ld = ""
         href = jurl
     else:
@@ -310,6 +310,7 @@ def journal_page(lang, slug=None):
 
 
 JOURNAL_URLS = []
+NOINDEX_JOURNAL = []
 for lang in languages.SUPPORTED:
     base = "" if lang == languages.DEFAULT else lang + "/"
     for slug, v in POSTS.items():
@@ -321,7 +322,10 @@ for lang in languages.SUPPORTED:
     d = os.path.join(ROOT, base + "journal")
     os.makedirs(d, exist_ok=True)
     open(os.path.join(d, "index.html"), "w", encoding="utf-8").write(journal_page(lang))
-    JOURNAL_URLS.insert(0, jurl(lang))
+    if any(lang in v for v in POSTS.values()):
+        JOURNAL_URLS.insert(0, jurl(lang))
+    else:
+        NOINDEX_JOURNAL.append(jurl(lang))
 
 LEGAL_URLS = [lurl(l, kind) for kind in LEGAL for l in languages.SUPPORTED]
 open(os.path.join(ROOT, "sitemap.xml"), "w").write(

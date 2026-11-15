@@ -12,7 +12,6 @@
  "chips": [
   "Chơi một tay",
   "Câu đố hằng ngày",
-  "Không có quảng cáo thưởng",
   "12 ngôn ngữ"
  ],
  "feats": [
@@ -58,7 +57,7 @@
   ],
   [
    "Chơi tiếp nếu bạn muốn.",
-   "Chơi tiếp từ chỗ bạn dừng. Dusk Blocks không có quảng cáo thưởng."
+   "Chơi tiếp từ chỗ bạn dừng."
   ]
  ],
  "alts": [

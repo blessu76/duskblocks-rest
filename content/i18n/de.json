@@ -12,7 +12,6 @@
  "chips": [
   "Einhandspiel",
   "Tägliches Rätsel",
-  "Keine Prämienwerbung",
   "12 Sprachen"
  ],
  "feats": [
@@ -58,7 +57,7 @@
   ],
   [
    "Wenn du magst, mach weiter.",
-   "Mach dort weiter, wo du aufgehört hast. Dusk Blocks hat keine Prämienwerbung."
+   "Mach dort weiter, wo du aufgehört hast."
   ]
  ],
  "alts": [

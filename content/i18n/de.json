@@ -12,7 +12,7 @@
  "chips": [
   "Einhandspiel",
   "Tägliches Rätsel",
-  "Fortsetzen mit Werbung nur auf Wunsch",
+  "Keine Prämienwerbung",
   "12 Sprachen"
  ],
  "feats": [
@@ -57,8 +57,8 @@
    "Die Runde endet sauber, mit deinen Punkten und deiner Besten im Blick."
   ],
   [
-   "Weiterspielen, wenn du magst.",
-   "Ein Fortsetzen mit Werbung erscheint nur, wenn du es willst."
+   "Wenn du magst, mach weiter.",
+   "Mach dort weiter, wo du aufgehört hast. Dusk Blocks hat keine Prämienwerbung."
   ]
  ],
  "alts": [

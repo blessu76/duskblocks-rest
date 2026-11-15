@@ -10,7 +10,7 @@
  "chips": [
   "Juego con una mano",
   "Reto diario",
-  "Continuar con anuncio solo si tú quieres",
+  "Sin anuncios con recompensa",
   "12 idiomas"
  ],
  "feats": [
@@ -56,7 +56,7 @@
   ],
   [
    "Continúa si quieres.",
-   "El anuncio para continuar solo aparece si tú lo eliges."
+   "Retoma donde lo dejaste. Dusk Blocks no tiene anuncios con recompensa."
   ]
  ],
  "alts": [

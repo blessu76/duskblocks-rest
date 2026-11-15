@@ -12,7 +12,7 @@
  "chips": [
   "Main satu tangan",
   "Puzzle harian",
-  "Lanjut dengan iklan hanya jika kamu mau",
+  "Tanpa iklan berhadiah",
   "12 bahasa"
  ],
  "feats": [
@@ -57,8 +57,8 @@
    "Permainan berakhir dengan rapi, lengkap dengan skor dan skor terbaikmu."
   ],
   [
-   "Lanjutkan kalau kamu mau.",
-   "Opsi lanjut dengan iklan hanya muncul jika kamu memilihnya."
+   "Lanjutkan jika kamu mau.",
+   "Lanjut dari tempat kamu berhenti. Dusk Blocks tidak memakai iklan berhadiah."
   ]
  ],
  "alts": [

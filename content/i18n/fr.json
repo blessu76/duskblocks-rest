@@ -10,7 +10,7 @@
  "chips": [
   "Jeu à une main",
   "Défi du jour",
-  "Continuer avec une pub, seulement si vous le voulez",
+  "Aucune publicité récompensée",
   "12 langues"
  ],
  "feats": [
@@ -55,8 +55,8 @@
    "La partie se termine en douceur, avec votre score et votre meilleur score sous les yeux."
   ],
   [
-   "Continuez si vous le souhaitez.",
-   "La pub pour continuer n'apparaît que si vous le choisissez."
+   "Reprenez si vous le souhaitez.",
+   "Reprenez là où vous vous êtes arrêté. Dusk Blocks n'a aucune publicité récompensée."
   ]
  ],
  "alts": [

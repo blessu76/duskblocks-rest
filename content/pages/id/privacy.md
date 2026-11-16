@@ -1,7 +1,7 @@
 ---
 title: Kebijakan Privasi
 description: Kebijakan privasi Dusk Blocks. Aplikasi dan situs web ini tidak mengumpulkan informasi pribadi.
-updated: 2026-11-14
+updated: 2026-11-16
 ---
 **Singkatnya:** aplikasi Dusk Blocks tidak mengumpulkan informasi pribadi dan tidak berisi analitik maupun iklan. Situs web ini adalah situs statis tanpa analitik dan tanpa cookie, serta tidak meminta nama, email, atau akun.
 
@@ -11,9 +11,11 @@ Tanggal berlaku: {{EFFECTIVE}} · Operator: {{OPERATOR}}
 
 Dusk Blocks ("Aplikasi") adalah game seluler yang dioperasikan oleh pengembang perorangan, {{OPERATOR}}. Aplikasi tidak memiliki akun atau proses masuk, dan tidak mengumpulkan maupun mengirim ke server mana pun informasi pribadi seperti nama, email, detail kontak, lokasi, atau pengenal perangkat.
 
-Kemajuan permainan, skor, dan pengaturanmu disimpan hanya di perangkatmu dan ikut terhapus saat kamu menghapus Aplikasi. Permainan ini berjalan tanpa koneksi internet.
+Kemajuan permainan, skor, dan pengaturanmu disimpan di perangkatmu dan ikut terhapus saat kamu menghapus Aplikasi. Jika memakai sinkronisasi iCloud, kemajuan permainanmu juga disimpan di iCloud milikmu sendiri (lihat di bawah). Permainan ini berjalan tanpa koneksi internet.
 
 Aplikasi tidak berisi iklan, analitik, maupun SDK pelacakan.
+
+**Sinkronisasi iCloud (iOS).** Agar kamu tetap bisa bermain di perangkat lain yang masuk dengan Apple ID yang sama, Aplikasi iOS menyimpan kemajuan permainanmu di iCloud milikmu sendiri dan menyinkronkannya antarperangkatmu. Data ini disimpan di akun iCloud-mu dan tidak dikirim kepada kami atau server mana pun yang kami kelola; kami tidak dapat melihatnya. Jika kamu mematikan iCloud untuk Aplikasi (atau perangkat), kemajuanmu hanya tersimpan di perangkat tersebut.
 
 ## 2. Situs web
 

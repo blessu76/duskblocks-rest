@@ -1,7 +1,7 @@
 ---
 title: Chính sách quyền riêng tư
 description: Chính sách quyền riêng tư của Dusk Blocks. Ứng dụng và trang web này không thu thập thông tin cá nhân.
-updated: 2026-11-14
+updated: 2026-11-16
 ---
 **Tóm lại:** ứng dụng Dusk Blocks không thu thập thông tin cá nhân và không chứa công cụ phân tích hay quảng cáo. Trang web này là trang tĩnh, không có công cụ phân tích và không dùng cookie, đồng thời không yêu cầu tên, email hay tài khoản.
 
@@ -11,9 +11,11 @@ Ngày có hiệu lực: {{EFFECTIVE}} · Đơn vị vận hành: {{OPERATOR}}
 
 Dusk Blocks ("Ứng dụng") là trò chơi di động do một nhà phát triển cá nhân, {{OPERATOR}}, vận hành. Ứng dụng không có tài khoản hay đăng nhập, và không thu thập hay gửi đến bất kỳ máy chủ nào các thông tin cá nhân như tên, email, thông tin liên lạc, vị trí hoặc mã định danh thiết bị của bạn.
 
-Tiến trình chơi, điểm số và cài đặt của bạn chỉ được lưu trên thiết bị của bạn và sẽ bị xóa khi bạn xóa Ứng dụng. Trò chơi hoạt động không cần kết nối internet.
+Tiến trình chơi, điểm số và cài đặt của bạn được lưu trên thiết bị của bạn và sẽ bị xóa khi bạn xóa Ứng dụng. Nếu dùng đồng bộ iCloud, tiến trình chơi cũng được lưu trong iCloud của chính bạn (xem bên dưới). Trò chơi hoạt động không cần kết nối internet.
 
 Ứng dụng không chứa SDK quảng cáo, phân tích hay theo dõi.
+
+**Đồng bộ iCloud (iOS).** Để bạn có thể tiếp tục chơi trên thiết bị khác đăng nhập cùng một Apple ID, Ứng dụng iOS lưu tiến trình chơi vào iCloud của chính bạn và đồng bộ giữa các thiết bị. Dữ liệu này được giữ trong tài khoản iCloud của bạn, không được gửi đến chúng tôi hoặc bất kỳ máy chủ nào do chúng tôi vận hành; chúng tôi không thể xem được. Nếu bạn tắt iCloud cho Ứng dụng (hoặc cho thiết bị), tiến trình của bạn chỉ được lưu trên thiết bị đó.
 
 ## 2. Trang web
 

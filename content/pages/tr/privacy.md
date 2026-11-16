@@ -1,7 +1,7 @@
 ---
 title: Gizlilik Politikası
 description: Dusk Blocks gizlilik politikası. Uygulama ve bu web sitesi hiçbir kişisel bilgi toplamaz.
-updated: 2026-11-14
+updated: 2026-11-16
 ---
 **Kısaca:** Dusk Blocks uygulaması hiçbir kişisel bilgi toplamaz; analiz veya reklam içermez. Bu web sitesi analiz ve çerez kullanmayan statik bir sitedir; ad, e-posta veya hesap istemez.
 
@@ -11,9 +11,11 @@ Yürürlük tarihi: {{EFFECTIVE}} · İşletmeci: {{OPERATOR}}
 
 Dusk Blocks ("Uygulama"), bireysel geliştirici {{OPERATOR}} tarafından işletilen bir mobil oyundur. Uygulamada hesap veya oturum açma yoktur; adınız, e-postanız, iletişim bilgileriniz, konumunuz veya cihaz kimlikleriniz gibi hiçbir kişisel bilgiyi toplamaz ya da herhangi bir sunucuya göndermez.
 
-İlerlemen, skorların ve ayarların yalnızca cihazında saklanır ve Uygulamayı sildiğinde cihazdan silinir. Oyun internet bağlantısı olmadan çalışır.
+İlerlemen, skorların ve ayarların cihazında saklanır ve Uygulamayı sildiğinde cihazdan silinir. iCloud senkronizasyonunu kullanırsan oyun ilerlemen ayrıca kendi iCloud hesabında da saklanır (aşağıya bak). Oyun internet bağlantısı olmadan çalışır.
 
 Uygulama reklam, analiz veya izleme SDK'sı içermez.
+
+**iCloud senkronizasyonu (iOS).** Aynı Apple Kimliği ile oturum açılmış başka bir cihazda oynamaya devam edebilmeniz için iOS Uygulaması oyun ilerlemenizi kendi iCloud hesabınızda saklar ve cihazlarınız arasında senkronize eder. Bu veriler iCloud hesabınızda tutulur; bize ya da işlettiğimiz hiçbir sunucuya gönderilmez ve biz bunları göremeyiz. Uygulama için (veya cihazınızda) iCloud'u kapatırsanız ilerlemeniz yalnızca o cihazda kalır.
 
 ## 2. Web sitesi
 

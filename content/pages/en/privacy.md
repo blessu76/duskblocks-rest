@@ -1,7 +1,7 @@
 ---
 title: Privacy Policy
 description: Privacy policy for Dusk Blocks. The app and this website collect no personal information.
-updated: 2026-11-14
+updated: 2026-11-16
 ---
 **In short:** the Dusk Blocks app collects no personal information and contains no analytics or ads. This website is a static site with no analytics and no cookies, and it asks for no name, email or account.
 
@@ -11,9 +11,11 @@ Effective date: {{EFFECTIVE}} · Operator: {{OPERATOR}}
 
 Dusk Blocks ("the App") is a mobile game operated by an individual developer, {{OPERATOR}}. The App has no accounts or sign-in, and it does not collect or send to any server any personal information such as your name, email, contact details, location or device identifiers.
 
-Your game progress, scores and settings are stored on your device only and are deleted from it when you delete the App. The game works without an internet connection.
+Your game progress, scores and settings are stored on your device and are deleted from it when you delete the App. If you use iCloud sync (see below), they are also kept in your own iCloud. The game works without an internet connection.
 
 The App contains no advertising, analytics or tracking SDKs.
+
+**iCloud sync (iOS).** So that you can keep playing on another device signed in with the same Apple ID, the iOS App keeps your game progress in your own iCloud and syncs it between your devices. This data is kept in your iCloud account and is not sent to us or to any server we run; we cannot see it. If you turn iCloud off for the App (or for your device), your progress is kept on that device only.
 
 ## 2. The website
 

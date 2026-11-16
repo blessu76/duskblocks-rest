@@ -1,7 +1,7 @@
 ---
 title: Datenschutzerklärung
 description: Datenschutzerklärung für Dusk Blocks. Die App und diese Website erheben keine personenbezogenen Daten.
-updated: 2026-11-14
+updated: 2026-11-16
 ---
 **Kurz gesagt:** Die Dusk Blocks-App erhebt keine personenbezogenen Daten und enthält weder Analyse noch Werbung. Diese Website ist eine statische Seite ohne Analyse und ohne Cookies und fragt weder nach Namen, E-Mail noch Konto.
 
@@ -11,9 +11,11 @@ Datum des Inkrafttretens: {{EFFECTIVE}} · Betreiber: {{OPERATOR}}
 
 Dusk Blocks („die App“) ist ein Mobilspiel, das von einem einzelnen Entwickler, {{OPERATOR}}, betrieben wird. Die App hat weder Konten noch Anmeldung und erhebt oder sendet keine personenbezogenen Daten wie Name, E-Mail, Kontaktdaten, Standort oder Gerätekennungen an einen Server.
 
-Dein Spielfortschritt, deine Punktestände und deine Einstellungen werden nur auf deinem Gerät gespeichert und mit der App von dort gelöscht. Das Spiel funktioniert ohne Internetverbindung.
+Dein Spielfortschritt, deine Punktestände und deine Einstellungen werden auf deinem Gerät gespeichert und mit der App von dort gelöscht. Bei Nutzung der iCloud-Synchronisierung wird dein Spielfortschritt außerdem in deiner eigenen iCloud gespeichert (siehe unten). Das Spiel funktioniert ohne Internetverbindung.
 
 Die App enthält keine SDKs für Werbung, Analyse oder Tracking.
+
+**iCloud-Synchronisierung (iOS).** Damit du auf einem anderen Gerät, das mit derselben Apple-ID angemeldet ist, weiterspielen kannst, speichert die iOS-App deinen Spielfortschritt in deiner eigenen iCloud und synchronisiert ihn zwischen deinen Geräten. Diese Daten werden in deinem iCloud-Konto gespeichert und nicht an uns oder an einen von uns betriebenen Server übertragen; wir können sie nicht einsehen. Wenn du iCloud für die App (oder für dein Gerät) deaktivierst, bleibt dein Fortschritt nur auf diesem Gerät gespeichert.
 
 ## 2. Die Website
 

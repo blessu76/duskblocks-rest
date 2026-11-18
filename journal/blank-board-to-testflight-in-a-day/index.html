@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>From an Empty Board to TestFlight in One Day — Dusk Blocks</title>
+<meta name="description" content="On 2026-11-11 Dusk Blocks went from an empty scaffold to a TestFlight build. The order we built things in, and what we left for later.">
+<meta name="theme-color" content="#171a36">
+<meta name="color-scheme" content="dark">
+<link rel="canonical" href="https://duskblocks.ipe.rest/journal/blank-board-to-testflight-in-a-day/">
+<link rel="alternate" hreflang="en" href="https://duskblocks.ipe.rest/journal/blank-board-to-testflight-in-a-day/">
+<link rel="alternate" hreflang="ko" href="https://duskblocks.ipe.rest/ko/journal/blank-board-to-testflight-in-a-day/">
+<link rel="alternate" hreflang="x-default" href="https://duskblocks.ipe.rest/journal/blank-board-to-testflight-in-a-day/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Dusk Blocks">
+<meta property="og:title" content="From an Empty Board to TestFlight in One Day — Dusk Blocks">
+<meta property="og:description" content="On 2026-11-11 Dusk Blocks went from an empty scaffold to a TestFlight build. The order we built things in, and what we left for later.">
+<meta property="og:url" content="https://duskblocks.ipe.rest/journal/blank-board-to-testflight-in-a-day/">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://duskblocks.ipe.rest/assets/og.png?v=20261114a">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="From an Empty Board to TestFlight in One Day — Dusk Blocks">
+<meta name="twitter:description" content="On 2026-11-11 Dusk Blocks went from an empty scaffold to a TestFlight build. The order we built things in, and what we left for later.">
+<meta name="twitter:image" content="https://duskblocks.ipe.rest/assets/og.png?v=20261114a">
+<link rel="icon" type="image/png" href="/assets/icon-180.png?v=20261114a">
+<link rel="apple-touch-icon" href="/assets/icon-180.png?v=20261114a">
+<link rel="stylesheet" href="/style.css?v=20261114a">
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "From an Empty Board to TestFlight in One Day", "description": "On 2026-11-11 Dusk Blocks went from an empty scaffold to a TestFlight build. The order we built things in, and what we left for later.", "datePublished": "2026-11-18T19:01:00+09:00", "inLanguage": "en", "mainEntityOfPage": "https://duskblocks.ipe.rest/journal/blank-board-to-testflight-in-a-day/", "author": {"@type": "Organization", "name": "ipe()", "url": "https://ipe.rest/"}, "publisher": {"@type": "Organization", "name": "ipe()", "url": "https://ipe.rest/"}}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar"><div class="wrap barin"><a class="brand" href="/"><img src="/assets/icon-180.png?v=20261114a" width="32" height="32" alt=""><span>Dusk Blocks</span></a><nav class="nav" aria-label="Main"><a href="/">Home</a><a href="/journal/" aria-current="page">Journal</a><div class="ipe-lang"><label class="ipe-lang__label" for="ipe-lang-select">Language</label><select class="ipe-lang__select" id="ipe-lang-select" aria-label="Language" onchange="var o=this.options[this.selectedIndex];try{localStorage.setItem(&#x27;ipe_lang&#x27;,o.lang)}catch(e){}if(o.value)location.href=o.value"><option value="/journal/blank-board-to-testflight-in-a-day/" lang="en" selected>English</option><option value="/ko/journal/blank-board-to-testflight-in-a-day/" lang="ko">한국어</option><option value="/ja/journal/" lang="ja">日本語</option><option value="/zh-Hant/journal/" lang="zh-Hant">繁體中文</option><option value="/es/journal/" lang="es">Español</option><option value="/pt-BR/journal/" lang="pt-BR">Português (Brasil)</option><option value="/fr/journal/" lang="fr">Français</option><option value="/de/journal/" lang="de">Deutsch</option><option value="/id/journal/" lang="id">Bahasa Indonesia</option><option value="/th/journal/" lang="th">ไทย</option><option value="/vi/journal/" lang="vi">Tiếng Việt</option><option value="/tr/journal/" lang="tr">Türkçe</option></select><noscript><nav class="ipe-lang__links" aria-label="Language"><a href="/journal/blank-board-to-testflight-in-a-day/" hreflang="en" aria-current="page">English</a><a href="/ko/journal/blank-board-to-testflight-in-a-day/" hreflang="ko">한국어</a><a href="/ja/journal/" hreflang="ja">日本語</a><a href="/zh-Hant/journal/" hreflang="zh-Hant">繁體中文</a><a href="/es/journal/" hreflang="es">Español</a><a href="/pt-BR/journal/" hreflang="pt-BR">Português (Brasil)</a><a href="/fr/journal/" hreflang="fr">Français</a><a href="/de/journal/" hreflang="de">Deutsch</a><a href="/id/journal/" hreflang="id">Bahasa Indonesia</a><a href="/th/journal/" hreflang="th">ไทย</a><a href="/vi/journal/" hreflang="vi">Tiếng Việt</a><a href="/tr/journal/" hreflang="tr">Türkçe</a></nav></noscript></div></nav></div></header>
+<main id="main"><div class="wrap jmain"><p class="rel-meta"><a href="/journal/">← All posts</a></p><article class="jpost"><p class="rel-meta"><time datetime="2026-11-18">2026-11-18</time></p><h1>From an Empty Board to TestFlight in One Day</h1><p><a href="/ko/journal/blank-board-to-testflight-in-a-day/">한국어로 읽기 →</a></p>
+<p>Dusk Blocks is built with an AI coding assistant, working in short steps, and the git history of the first day shows the order. All times are KST, 2026-11-11.</p>
+<ul><li><strong>12:19, scaffold.</strong> An empty board screen, the language files, and a green gate: a script that formats, analyses and tests before every commit.</li><li><strong>12:33, the core.</strong> Pure Dart rules: bitboard, the fair tray, scoring, continue, save format, and 30 tests. No Flutter code is allowed in this layer, and a test checks that.</li><li><strong>12:40, the game screen.</strong> Drawing the board and tray, drag-and-drop with the piece lifted above your finger, game over, settings, first-run hint, endless and daily modes.</li><li><strong>12:41 to 12:50, the bot simulator</strong> (<a href="/journal/two-bots-one-thousand-games/">results here</a>), and swapping two interface languages for Indonesian and Vietnamese.</li><li><strong>18:17, the name.</strong> The internal working name became Dusk Blocks.</li><li><strong>18:46, TestFlight.</strong> Build 1.0.0+2 uploaded and in the internal test group, about three minutes of processing. Not submitted for review.</li></ul>
+<h2>Why the order mattered</h2>
+<p>The risk in this game is not the screen, it is the rules: fairness, score, continue. So the rules went first, as pure functions with tests, and the screen came after as a thin layer on top. That is why the first playable build could be tested by bots before any person touched it.</p>
+<h2>What was left for later</h2>
+<p>Dusk Blocks will be a paid in-app purchase (price not set yet). The "continue" feature is a placeholder while we build. The privacy policy link is a placeholder and the settings row hides itself while it is empty. Screenshots were taken by a script that plays the game by dragging pieces, so the website images come from the real app.</p></article></div></main>
+<footer class="foot"><div class="wrap"><p class="slots"><a href="/journal/">Journal</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="mailto:ipe.haven@gmail.com">Contact</a></p><p class="small">© 2026 Dusk Blocks · A game by <a href="https://ipe.rest/">ipe()</a></p></div></footer>
+</body>
+</html>

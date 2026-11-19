@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Why a Combo in Dusk Blocks Lasts Three Moves — Dusk Blocks</title>
+<meta name="description" content="A combo in Dusk Blocks survives three placements without a clear. Here is the score formula and why we added a simple sum instead of a multiplier.">
+<meta name="theme-color" content="#171a36">
+<meta name="color-scheme" content="dark">
+<link rel="canonical" href="https://duskblocks.ipe.rest/journal/combo-lasts-three-moves/">
+<link rel="alternate" hreflang="en" href="https://duskblocks.ipe.rest/journal/combo-lasts-three-moves/">
+<link rel="alternate" hreflang="ko" href="https://duskblocks.ipe.rest/ko/journal/combo-lasts-three-moves/">
+<link rel="alternate" hreflang="x-default" href="https://duskblocks.ipe.rest/journal/combo-lasts-three-moves/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Dusk Blocks">
+<meta property="og:title" content="Why a Combo in Dusk Blocks Lasts Three Moves — Dusk Blocks">
+<meta property="og:description" content="A combo in Dusk Blocks survives three placements without a clear. Here is the score formula and why we added a simple sum instead of a multiplier.">
+<meta property="og:url" content="https://duskblocks.ipe.rest/journal/combo-lasts-three-moves/">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://duskblocks.ipe.rest/assets/og.png?v=20261114a">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Why a Combo in Dusk Blocks Lasts Three Moves — Dusk Blocks">
+<meta name="twitter:description" content="A combo in Dusk Blocks survives three placements without a clear. Here is the score formula and why we added a simple sum instead of a multiplier.">
+<meta name="twitter:image" content="https://duskblocks.ipe.rest/assets/og.png?v=20261114a">
+<link rel="icon" type="image/png" href="/assets/icon-180.png?v=20261114a">
+<link rel="apple-touch-icon" href="/assets/icon-180.png?v=20261114a">
+<link rel="stylesheet" href="/style.css?v=20261114a">
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Why a Combo in Dusk Blocks Lasts Three Moves", "description": "A combo in Dusk Blocks survives three placements without a clear. Here is the score formula and why we added a simple sum instead of a multiplier.", "datePublished": "2026-11-19T12:45:00+09:00", "inLanguage": "en", "mainEntityOfPage": "https://duskblocks.ipe.rest/journal/combo-lasts-three-moves/", "author": {"@type": "Organization", "name": "ipe()", "url": "https://ipe.rest/"}, "publisher": {"@type": "Organization", "name": "ipe()", "url": "https://ipe.rest/"}}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar"><div class="wrap barin"><a class="brand" href="/"><img src="/assets/icon-180.png?v=20261114a" width="32" height="32" alt=""><span>Dusk Blocks</span></a><nav class="nav" aria-label="Main"><a href="/">Home</a><a href="/journal/" aria-current="page">Journal</a><div class="ipe-lang"><label class="ipe-lang__label" for="ipe-lang-select">Language</label><select class="ipe-lang__select" id="ipe-lang-select" aria-label="Language" onchange="var o=this.options[this.selectedIndex];try{localStorage.setItem(&#x27;ipe_lang&#x27;,o.lang)}catch(e){}if(o.value)location.href=o.value"><option value="/journal/combo-lasts-three-moves/" lang="en" selected>English</option><option value="/ko/journal/combo-lasts-three-moves/" lang="ko">한국어</option><option value="/ja/journal/" lang="ja">日本語</option><option value="/zh-Hant/journal/" lang="zh-Hant">繁體中文</option><option value="/es/journal/" lang="es">Español</option><option value="/pt-BR/journal/" lang="pt-BR">Português (Brasil)</option><option value="/fr/journal/" lang="fr">Français</option><option value="/de/journal/" lang="de">Deutsch</option><option value="/id/journal/" lang="id">Bahasa Indonesia</option><option value="/th/journal/" lang="th">ไทย</option><option value="/vi/journal/" lang="vi">Tiếng Việt</option><option value="/tr/journal/" lang="tr">Türkçe</option></select><noscript><nav class="ipe-lang__links" aria-label="Language"><a href="/journal/combo-lasts-three-moves/" hreflang="en" aria-current="page">English</a><a href="/ko/journal/combo-lasts-three-moves/" hreflang="ko">한국어</a><a href="/ja/journal/" hreflang="ja">日本語</a><a href="/zh-Hant/journal/" hreflang="zh-Hant">繁體中文</a><a href="/es/journal/" hreflang="es">Español</a><a href="/pt-BR/journal/" hreflang="pt-BR">Português (Brasil)</a><a href="/fr/journal/" hreflang="fr">Français</a><a href="/de/journal/" hreflang="de">Deutsch</a><a href="/id/journal/" hreflang="id">Bahasa Indonesia</a><a href="/th/journal/" hreflang="th">ไทย</a><a href="/vi/journal/" hreflang="vi">Tiếng Việt</a><a href="/tr/journal/" hreflang="tr">Türkçe</a></nav></noscript></div></nav></div></header>
+<main id="main"><div class="wrap jmain"><p class="rel-meta"><a href="/journal/">← All posts</a></p><article class="jpost"><p class="rel-meta"><time datetime="2026-11-19">2026-11-19</time></p><h1>Why a Combo in Dusk Blocks Lasts Three Moves</h1><p><a href="/ko/journal/combo-lasts-three-moves/">한국어로 읽기 →</a></p>
+<p>Dusk Blocks has no timer and no levels. The score is the only thing that tells you how well a run is going, so it has to reward the right moves without making the number explode.</p>
+<h2>The base score</h2>
+<p>Every placement scores the same way:</p>
+<ul><li><strong>Each cell you place</strong> is worth 1 point.</li><li><strong>Each cleared line</strong> is worth <code>10 × L × L</code>, where <code>L</code> is the number of lines cleared at once. One line gives 10, two give 40, three give 90, four give 160. Clearing lines together is worth more than clearing them one at a time.</li><li><strong>A single-colour line</strong> adds 30 points for each such line. Each line has eight cells, so a line counts only when all eight are the same colour.</li></ul>
+<h2>The combo</h2>
+<p>A combo starts when you clear lines in consecutive placements. The rule is simple:</p>
+<ul><li>A placement that clears a line raises the combo by one.</li><li>A placement that clears nothing adds one to a counter of moves since the last clear. After <strong>three</strong> such moves with no clear, the combo resets.</li><li>From the second clear in a row, each clear adds <code>20 × (combo − 1)</code>.</li></ul>
+<p>Three is not arbitrary. The player gets three new pieces at a time, so a combo window of three placements means one tray is enough time to set up the next clear. Players can follow the rhythm without counting.</p>
+<h2>Why a sum, not a multiplier</h2>
+<p>We considered a multiplier that grows with each combo. It is more exciting on paper. We picked a flat bonus for two reasons:</p>
+<ul><li><strong>Scores stay readable.</strong> With a multiplier, a long combo quickly produces numbers that are hard to compare. With a sum, the best score still means something after months of play.</li><li><strong>The rules can be tested exactly.</strong> Each rule is a short formula, so the test table can state the expected score for every case.</li></ul>
+<p>A full clear of the board adds a flat 300 points. It is rare, and it is a reward, not a route to the top score.</p>
+<h2>One check</h2>
+<p>The on-screen message can say "×3" for a combo, which might suggest a multiplier. It does not. The number is a count, and the points come from the sum above.</p></article></div></main>
+<footer class="foot"><div class="wrap"><p class="slots"><a href="/journal/">Journal</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="mailto:ipe.haven@gmail.com">Contact</a></p><p class="small">© 2026 Dusk Blocks · A game by <a href="https://ipe.rest/">ipe()</a></p></div></footer>
+</body>
+</html>

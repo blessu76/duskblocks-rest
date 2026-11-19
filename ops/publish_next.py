@@ -2,8 +2,10 @@
 """큐(~/.ipe/queue/duskblocks/NN-slug/{en,ko}.md)의 가장 앞 글 하나를 발행한다.
 
 content/journal/<slug>/ 로 복사하며 date·time 을 지금으로 찍고, build → scripts/check.sh → git commit.
-push 는 기본 꺼짐(DUSK_PUSH=1 일 때만). 성공하면 큐 폴더를 .published/ 로 옮긴다.
-종료 코드: 0 발행 · 3 큐 비었음(STOCK_ALERT) · 그 밖 실패.
+push 는 기본 꺼짐(DUSK_PUSH=1 일 때만), commit 뒤 별도 단계로 한다. push 가 실패해도
+(네트워크 등) 발행은 성공으로 보고 큐 폴더를 .published/ 로 옮긴다 — 커밋은 클론에 남아, 다음 성공 push 때
+(지난번 push 실패분 포함) 같이 올라간다.
+종료 코드: 0 발행(push 실패 포함) · 3 큐 비었음(STOCK_ALERT) · 그 밖 실패.
 """
 import argparse
 import os
@@ -66,6 +68,25 @@ def sh(*cmd):
     return subprocess.run(cmd, cwd=REPO, check=True, text=True, capture_output=True).stdout.strip()
 
 
+PUSH_TIMEOUT = 60  # 초. 네트워크가 멎어도 틱이 멈추지 않게 한다.
+
+
+def push():
+    """origin main 으로 push. 실패·시간 초과는 stderr 에 로그만 남기고 False — 호출한 쪽은 발행을 실패로 보지 않는다."""
+    env = {**os.environ, "GIT_TERMINAL_PROMPT": "0"}
+    try:
+        subprocess.run(["git", "push", "origin", "main"], cwd=REPO, check=True, text=True,
+                       capture_output=True, timeout=PUSH_TIMEOUT, env=env)
+        return True
+    except subprocess.CalledProcessError as e:
+        print(f"push 실패(발행은 유지, 커밋은 클론에 남음): {(e.stderr or e.stdout or '').strip()}", file=sys.stderr)
+    except subprocess.TimeoutExpired:
+        print(f"push 시간 초과({PUSH_TIMEOUT}초, 발행은 유지, 커밋은 클론에 남음)", file=sys.stderr)
+    except OSError as e:
+        print(f"push 를 실행하지 못함(발행은 유지): {e}", file=sys.stderr)
+    return False
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--date", required=True)
@@ -90,13 +111,13 @@ def main():
         sh("bash", "scripts/check.sh")
         sh("git", "add", "-A")
         sh("git", "commit", "-m", f"저널: {slug} ({a.date} {a.time} KST)")
-        if os.environ.get("DUSK_PUSH") == "1":
-            sh("git", "push", "origin", "main")
     except subprocess.CalledProcessError as e:
         print((e.stdout or "") + (e.stderr or ""), file=sys.stderr)
         sh("git", "reset", "--hard", "HEAD")
         sh("git", "clean", "-fd", "--", "content/journal", "journal", "ko/journal")
         return 5
+    if os.environ.get("DUSK_PUSH") == "1":
+        push()  # 실패해도 발행은 성공 — 아래에서 큐를 옮긴다.
     done = os.path.join(a.queue, ".published")
     os.makedirs(done, exist_ok=True)
     shutil.move(os.path.join(a.queue, name), os.path.join(done, name))

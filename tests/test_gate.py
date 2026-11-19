@@ -88,6 +88,17 @@ class Run(unittest.TestCase):
         self.assertEqual((s["date"], s["prev_time"], s["published"]), ("2026-11-14", "15:30", False))
         self.assertNotEqual(s["time"][:2], "15")
 
+    def test_publish_prearms_next_slot_and_next_day_uses_it(self):
+        self.seed()
+        g.run(kst("2026-11-14 14:15"), self.q, rng=random.Random(7), publish=self.pub())
+        s = g.load(os.path.join(self.q, "slot.json"))
+        self.assertEqual(s["next_date"], "2026-11-15")
+        self.assertTrue(12 <= int(s["next_time"][:2]) <= 17)
+        self.assertNotEqual(s["next_time"][:2], "14")
+        g.run(kst("2026-11-15 12:00"), self.q, rng=random.Random(99), publish=self.pub())
+        n = g.load(os.path.join(self.q, "slot.json"))
+        self.assertEqual((n["date"], n["time"]), ("2026-11-15", s["next_time"]))
+
 
 if __name__ == "__main__":
     unittest.main()

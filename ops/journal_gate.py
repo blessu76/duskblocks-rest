@@ -11,7 +11,7 @@ import os
 import random
 import subprocess
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 
 KST = ZoneInfo("Asia/Seoul")
@@ -32,8 +32,21 @@ def roll(slot, today, rng=random):
     if slot and slot.get("date") == today:
         return slot
     old = slot or {}
-    return {"date": today, "time": pick_time(old.get("time"), rng),
+    # 발행 때 미리 뽑아 둔 오늘 시각(next_*)이 있으면 그대로 쓴다 — 어제와 다른 시(hour)는 그때 이미 보장.
+    if old.get("next_date") == today and old.get("next_time"):
+        t = old["next_time"]
+    else:
+        t = pick_time(old.get("time"), rng)
+    return {"date": today, "time": t,
             "prev_date": old.get("date"), "prev_time": old.get("time"), "published": False}
+
+
+def plan_next(slot, today, rng=random):
+    """내일 시각을 미리 뽑아 slot 에 next_date·next_time 으로 적는다(확인용·내일 그대로 사용)."""
+    tomorrow = (datetime.strptime(today, "%Y-%m-%d") + timedelta(days=1)).strftime("%Y-%m-%d")
+    slot["next_date"] = tomorrow
+    slot["next_time"] = pick_time(slot["time"], rng)
+    return slot
 
 
 def due(slot, now_hhmm):
@@ -72,7 +85,9 @@ def run(now, queue=QUEUE, rng=random, publish=None):
         ok = (publish or default_publish)(today, now.strftime("%H:%M"), queue)
         if ok:
             slot["published"] = True
+            plan_next(slot, today, rng)
             save(slot_path, slot)
+            print(f"next: {slot['next_date']} {slot['next_time']} KST")
             return "published"
         return "failed"
 

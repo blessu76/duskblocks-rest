@@ -4,6 +4,7 @@ import random
 import tempfile
 import unittest
 from datetime import datetime
+from unittest import mock
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 spec = importlib.util.spec_from_file_location("journal_gate", os.path.join(HERE, "..", "ops", "journal_gate.py"))
@@ -98,6 +99,54 @@ class Run(unittest.TestCase):
         g.run(kst("2026-11-15 12:00"), self.q, rng=random.Random(99), publish=self.pub())
         n = g.load(os.path.join(self.q, "slot.json"))
         self.assertEqual((n["date"], n["time"]), ("2026-11-15", s["next_time"]))
+
+    def test_plan_next_failure_keeps_published_true_on_disk(self):
+        self.seed()
+        path = os.path.join(self.q, "slot.json")
+        with mock.patch.object(g, "plan_next", side_effect=RuntimeError("boom")):
+            self.assertEqual(g.run(kst("2026-11-14 14:15"), self.q, publish=self.pub()), "published")
+        self.assertTrue(g.load(path)["published"])
+        # 다음 틱에 같은 날 재발행되지 않는다
+        self.assertEqual(g.run(kst("2026-11-14 14:30"), self.q, publish=self.pub()), "skip")
+        self.assertEqual(len(self.calls), 1)
+
+    def test_publish_failure_writes_no_next_fields(self):
+        self.seed()
+        self.assertEqual(g.run(kst("2026-11-14 14:15"), self.q, publish=self.pub(False)), "failed")
+        s = g.load(os.path.join(self.q, "slot.json"))
+        self.assertNotIn("next_date", s)
+        self.assertNotIn("next_time", s)
+
+
+class Corrupt(unittest.TestCase):
+    def roll_with_next(self, next_time, next_date="2026-11-15", seed=11):
+        old = {"date": "2026-11-14", "time": "14:00", "published": True,
+               "next_date": next_date, "next_time": next_time}
+        return g.roll(old, "2026-11-15", random.Random(seed))
+
+    def test_corrupt_next_time_falls_back_to_pick_time(self):
+        for bad in ("99:99", "9:5", "20:00", "11:30", "17:60", "1430", None, 1430):
+            n = self.roll_with_next(bad)
+            self.assertEqual(n["time"], g.pick_time("14:00", random.Random(11)), bad)
+            self.assertTrue(g.valid_time(n["time"]), bad)
+            self.assertTrue(12 <= int(n["time"][:2]) <= 17, bad)
+
+    def test_next_date_not_today_falls_back_to_pick_time(self):
+        n = self.roll_with_next("15:20", next_date="2026-11-16")  # 하루 건너뜀
+        self.assertEqual(n["time"], g.pick_time("14:00", random.Random(11)))
+
+    def test_valid_next_time_is_used(self):
+        n = self.roll_with_next("15:20")
+        self.assertEqual(n["time"], "15:20")
+
+
+class MonthEnd(unittest.TestCase):
+    def test_plan_next_month_and_year_rollover(self):
+        for today, expect in (("2026-11-30", "2026-12-01"), ("2026-12-31", "2027-01-01")):
+            s = g.plan_next({"time": "14:00"}, today, random.Random(4))
+            self.assertEqual(s["next_date"], expect)
+            self.assertTrue(g.valid_time(s["next_time"]))
+            self.assertNotEqual(s["next_time"][:2], "14")
 
 
 if __name__ == "__main__":

@@ -1,14 +1,18 @@
 #!/usr/bin/env python3
 """오후 랜덤 발행 게이트 — launchd 가 12:00~18:45 KST 동안 15분마다 부른다.
 
-상태: ~/.ipe/queue/duskblocks/slot.json = {"date","time","prev_date","prev_time","published"}
+상태: ~/.ipe/queue/duskblocks/slot.json = {"date","time","prev_date","prev_time","published","next_date","next_time"}
 - 오늘 날짜가 아니면 12:00~17:59 중 어제 시각의 '시'와 다른 시각을 새로 뽑는다(이전 값은 prev_* 로).
-- 지금 >= time 이고 published=false 면 publish_next.py 를 돌리고, 성공하면 published=true.
+  단 발행 때 미리 뽑아 둔 next_date(== 오늘)·next_time 이 유효하면 그것을 쓴다(손상된 값은 버리고 새로 뽑는다).
+- 지금 >= time 이고 published=false 면 publish_next.py 를 돌리고, 성공하면 published=true 를 먼저 저장한다.
+  next_date·next_time(내일 시각)은 그 뒤 최선 노력으로 적는다 — 실패해도 발행 결과는 그대로다.
+  발행이 실패하면 next_* 는 건드리지 않는다.
 """
 import fcntl
 import json
 import os
 import random
+import re
 import subprocess
 import sys
 from datetime import datetime, timedelta
@@ -27,13 +31,22 @@ def pick_time(prev_time, rng=random):
     return f"{rng.choice(hours):02d}:{rng.randrange(60):02d}"
 
 
+def valid_time(t):
+    """'HH:MM'(두 자리) 이고 시가 12~17 인 값만 참."""
+    if not isinstance(t, str) or not re.fullmatch(r"\d{2}:\d{2}", t):
+        return False
+    h, m = int(t[:2]), int(t[3:])
+    return h in HOURS and m < 60
+
+
 def roll(slot, today, rng=random):
     """날짜가 바뀌었으면 슬롯을 굴린다. 같은 날이면 그대로."""
     if slot and slot.get("date") == today:
         return slot
     old = slot or {}
     # 발행 때 미리 뽑아 둔 오늘 시각(next_*)이 있으면 그대로 쓴다 — 어제와 다른 시(hour)는 그때 이미 보장.
-    if old.get("next_date") == today and old.get("next_time"):
+    # 손상된 값("99:99", "9:5", 12~17시 밖)이면 버리고 새로 뽑는다.
+    if old.get("next_date") == today and valid_time(old.get("next_time")):
         t = old["next_time"]
     else:
         t = pick_time(old.get("time"), rng)
@@ -84,10 +97,16 @@ def run(now, queue=QUEUE, rng=random, publish=None):
             return "skip" if slot["published"] else "wait"
         ok = (publish or default_publish)(today, now.strftime("%H:%M"), queue)
         if ok:
+            # published=true 를 먼저 디스크에 남긴다 — 이후 단계가 실패해도 다음 틱에 같은 날 재발행되지 않는다.
             slot["published"] = True
-            plan_next(slot, today, rng)
             save(slot_path, slot)
-            print(f"next: {slot['next_date']} {slot['next_time']} KST")
+            # 내일 시각 미리 뽑기는 최선 노력: 실패해도 발행 결과는 그대로 둔다.
+            try:
+                plan_next(slot, today, rng)
+                save(slot_path, slot)
+                print(f"next: {slot['next_date']} {slot['next_time']} KST")
+            except Exception as e:  # noqa: BLE001 — 로그만 남기고 발행 성공은 유지
+                print(f"next 미리 뽑기 실패(발행은 완료): {e}", file=sys.stderr)
             return "published"
         return "failed"
 

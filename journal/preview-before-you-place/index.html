@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dusk Blocks Shows Which Lines Will Clear Before You Place — Dusk Blocks</title>
+<meta name="description" content="Dusk Blocks can show which rows and columns a piece would clear before you let go. Here is how the preview is computed and why it never touches the board.">
+<meta name="theme-color" content="#171a36">
+<meta name="color-scheme" content="dark">
+<link rel="canonical" href="https://duskblocks.ipe.rest/journal/preview-before-you-place/">
+<link rel="alternate" hreflang="en" href="https://duskblocks.ipe.rest/journal/preview-before-you-place/">
+<link rel="alternate" hreflang="ko" href="https://duskblocks.ipe.rest/ko/journal/preview-before-you-place/">
+<link rel="alternate" hreflang="x-default" href="https://duskblocks.ipe.rest/journal/preview-before-you-place/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Dusk Blocks">
+<meta property="og:title" content="Dusk Blocks Shows Which Lines Will Clear Before You Place — Dusk Blocks">
+<meta property="og:description" content="Dusk Blocks can show which rows and columns a piece would clear before you let go. Here is how the preview is computed and why it never touches the board.">
+<meta property="og:url" content="https://duskblocks.ipe.rest/journal/preview-before-you-place/">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://duskblocks.ipe.rest/assets/og.png?v=20261114a">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Dusk Blocks Shows Which Lines Will Clear Before You Place — Dusk Blocks">
+<meta name="twitter:description" content="Dusk Blocks can show which rows and columns a piece would clear before you let go. Here is how the preview is computed and why it never touches the board.">
+<meta name="twitter:image" content="https://duskblocks.ipe.rest/assets/og.png?v=20261114a">
+<link rel="icon" type="image/png" href="/assets/icon-180.png?v=20261114a">
+<link rel="apple-touch-icon" href="/assets/icon-180.png?v=20261114a">
+<link rel="stylesheet" href="/style.css?v=20261114a">
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Dusk Blocks Shows Which Lines Will Clear Before You Place", "description": "Dusk Blocks can show which rows and columns a piece would clear before you let go. Here is how the preview is computed and why it never touches the board.", "datePublished": "2026-11-21T13:45:00+09:00", "inLanguage": "en", "mainEntityOfPage": "https://duskblocks.ipe.rest/journal/preview-before-you-place/", "author": {"@type": "Organization", "name": "ipe()", "url": "https://ipe.rest/"}, "publisher": {"@type": "Organization", "name": "ipe()", "url": "https://ipe.rest/"}}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar"><div class="wrap barin"><a class="brand" href="/"><img src="/assets/icon-180.png?v=20261114a" width="32" height="32" alt=""><span>Dusk Blocks</span></a><nav class="nav" aria-label="Main"><a href="/">Home</a><a href="/journal/" aria-current="page">Journal</a><div class="ipe-lang"><label class="ipe-lang__label" for="ipe-lang-select">Language</label><select class="ipe-lang__select" id="ipe-lang-select" aria-label="Language" onchange="var o=this.options[this.selectedIndex];try{localStorage.setItem(&#x27;ipe_lang&#x27;,o.lang)}catch(e){}if(o.value)location.href=o.value"><option value="/journal/preview-before-you-place/" lang="en" selected>English</option><option value="/ko/journal/preview-before-you-place/" lang="ko">한국어</option><option value="/ja/journal/" lang="ja">日本語</option><option value="/zh-Hant/journal/" lang="zh-Hant">繁體中文</option><option value="/es/journal/" lang="es">Español</option><option value="/pt-BR/journal/" lang="pt-BR">Português (Brasil)</option><option value="/fr/journal/" lang="fr">Français</option><option value="/de/journal/" lang="de">Deutsch</option><option value="/id/journal/" lang="id">Bahasa Indonesia</option><option value="/th/journal/" lang="th">ไทย</option><option value="/vi/journal/" lang="vi">Tiếng Việt</option><option value="/tr/journal/" lang="tr">Türkçe</option></select><noscript><nav class="ipe-lang__links" aria-label="Language"><a href="/journal/preview-before-you-place/" hreflang="en" aria-current="page">English</a><a href="/ko/journal/preview-before-you-place/" hreflang="ko">한국어</a><a href="/ja/journal/" hreflang="ja">日本語</a><a href="/zh-Hant/journal/" hreflang="zh-Hant">繁體中文</a><a href="/es/journal/" hreflang="es">Español</a><a href="/pt-BR/journal/" hreflang="pt-BR">Português (Brasil)</a><a href="/fr/journal/" hreflang="fr">Français</a><a href="/de/journal/" hreflang="de">Deutsch</a><a href="/id/journal/" hreflang="id">Bahasa Indonesia</a><a href="/th/journal/" hreflang="th">ไทย</a><a href="/vi/journal/" hreflang="vi">Tiếng Việt</a><a href="/tr/journal/" hreflang="tr">Türkçe</a></nav></noscript></div></nav></div></header>
+<main id="main"><div class="wrap jmain"><p class="rel-meta"><a href="/journal/">← All posts</a></p><article class="jpost"><p class="rel-meta"><time datetime="2026-11-21">2026-11-21</time></p><h1>Dusk Blocks Shows Which Lines Will Clear Before You Place</h1><p><a href="/ko/journal/preview-before-you-place/">한국어로 읽기 →</a></p>
+<p>A block puzzle is mostly decisions made with a piece in your hand. We wanted the game to answer one question while you hold it: if I put it here, what disappears?</p>
+<h2>What the preview does</h2>
+<p>For a given piece and a given position, the game works out which rows and columns would be full after the piece lands. Those are the lines that would clear. If the piece does not fit at that position, the answer is simply "nothing", so an impossible spot never shows a false promise.</p>
+<h2>How it is computed</h2>
+<p>The board is 8×8, so the whole board fits in a single 64-bit mask, one bit per cell. The preview does three small things:</p>
+<ul><li>It checks that the piece fits at the chosen position.</li><li>It adds the piece's cells to a copy of the mask.</li><li>It compares each of the eight rows and eight columns against a full-line mask. Every line that matches would clear.</li></ul>
+<p>Rows and columns are checked together, so a placement that completes one of each is reported as both.</p>
+<h2>Why it never touches the board</h2>
+<p>The preview is a pure function. It reads the board's occupancy and returns two lists, one of rows and one of columns, and it changes nothing. That matters for two reasons:</p>
+<ul><li><strong>Dragging stays safe.</strong> You can move a piece across the board, and nothing is placed, scored or counted until you release it.</li><li><strong>It is easy to test.</strong> The same inputs always give the same lines, so a test can set up a board, name a position and state the expected rows and columns.</li></ul>
+<h2>What it does not do</h2>
+<p>The preview shows lines, not points. It does not tell you the score, and it does not tell you whether the move is a good one. Choosing between clearing now and setting up a bigger clear later stays with you.</p></article></div></main>
+<footer class="foot"><div class="wrap"><p class="slots"><a href="/journal/">Journal</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="mailto:ipe.haven@gmail.com">Contact</a></p><p class="small">© 2026 Dusk Blocks · A game by <a href="https://ipe.rest/">ipe()</a></p></div></footer>
+</body>
+</html>
